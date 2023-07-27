@@ -28,6 +28,10 @@ function Contact() {
                     <input type="text" placeholder="Search here..." />
                 </div>
             </nav>
+
+
+
+            
     
     
     

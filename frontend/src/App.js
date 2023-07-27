@@ -11,6 +11,9 @@ import News from './Pages/News'
 import Health from './Pages/Health'
 import ScienceTech from './Pages/ScienceTech'
 import LatestNews from './Pages/LatestNews'
+import PageMain from './Pages/PageMain'
+import Navbar from './components/AdminPage/Navbar'
+import About from './Pages/About'
 
 
 
@@ -30,7 +33,10 @@ function App() {
               <Route path="/News" element={<News/>}/>  
               <Route path="/Health" element={<Health/>}/> 
               <Route path="/Science&Tech" element={<ScienceTech/>}/>   
-              <Route path="/LatestNews" element={<LatestNews/>}/>     
+              <Route path="/LatestNews" element={<LatestNews/>}/>   
+              <Route path="/Article" element={<PageMain/>}/>   
+              <Route path="/Navbar" element={<Navbar/>}/>
+              <Route path="/About" element={<About/>}/>
             </Routes>
       
       

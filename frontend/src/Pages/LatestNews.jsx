@@ -36,6 +36,7 @@ function  LatestNews() {
             <div class='col-sm-7 m-4'>
                 <h2> ख़बरों की ख़बर </h2>
              </div>
+            
             <div class="card pt-4" >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
