@@ -1,4 +1,7 @@
 import {useEffect,useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
  
  
  
@@ -11,9 +14,25 @@ const Dashboard = () => {
        fetch('https://jsonplaceholder.typicode.com/users')
        .then(resposne=> resposne.json())
        .then(res=>setRecord(res))
-   }
- 
+   };
+   const hasValidJwtToken = () => {
+    const jwtToken = localStorage.getItem('jwtToken');
+    if (jwtToken) {
+      return true; 
+    }
+    return false; // Return false if the token is not present
+  };
+  //localStorage.setItem('jwtToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJ1c2VybmFtZSI6InJlZ2lvbmFsIn0sImlhdCI6MTY5MDQ4NzAzMiwiZXhwIjoxNjkwNDg3OTMyfQ.mxhDu3sK4EUEBtwl1l97CMknEwVWhaggPvccIbKcg-c');
+
+  const navigate = useNavigate();
    useEffect(() => {
+    const isAuthenticated = hasValidJwtToken();
+
+    if (!isAuthenticated) {
+
+        navigate('/admin/Log-in'); 
+
+    }
       getData();
    },)
     
