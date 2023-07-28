@@ -9,9 +9,9 @@ function PageMain() {
 
 
 
-    
+
     <div class='col-sm-4'>
-    <img src="/images0/logo.jpeg" alt="" />
+    <img src="/images/logo.jpeg" alt="" />
     </div>
     
     

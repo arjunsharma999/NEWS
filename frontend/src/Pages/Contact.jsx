@@ -1,42 +1,33 @@
 import React from 'react'
+import Navbar from '../components/AdminPage/Navbar'
 
 function Contact() {
   return (
     <>
-     <nav class="nav">
-                <i class="uil uil-bars navOpenBtn"></i>
-                <a href="#" class="logo"><img src="/images/logo.jpeg" alt="" /></a>
-                <ul class="nav-links">
-                    <i class="uil uil-times navCloseBtn"></i>
-                    <li><a href="#">हमारे बारे में</a></li>  
-                    <li><a href="#">संपर्क</a></li>
-                    <li><a href="#">ख़बरों की ख़बर</a></li>  
-                    <li><a href="#">बकंभम</a></li>
-                    <li><a href="#">मंथन</a></li>
-                    <li><a href="#">खबरे</a></li>
-                    <li><a href="#">साहित्य</a></li>
-                    <li><a href="#">संपदकी</a></li>
-                    <li><a href="#">पहाड़ रैबार</a></li>
-                    <li><a href="#">विज्ञान और तकनीक</a></li>
-                    <li><a href="#">वीडियो</a></li>
-                    <li><a href="#">स्वस्थ्य</a></li>
-                    <li><a href="#">शहरनामा</a></li>
-                </ul>
-                <i class="uil uil-search search-icon" id="searchIcon"></i>
-                <div class="search-box">
-                    <i class="uil uil-search search-icon"></i>
-                    <input type="text" placeholder="Search here..." />
-                </div>
-            </nav>
+
+      <Navbar />
+
+      <div class='Contact-img'>
+        <img src="" alt="" />
+      </div>
+
+      <div class='col-md-4 m-5'>
+          
+           <h2> Addres </h2>
+        <h3> 
+          रीजनल रिपोर्टर
+          76 अप्पर बाजार शंकर निवास श्रीनगर गढ़वाल
+          मोबाइल 9412079290,7455089290 </h3>
+
+      </div>
 
 
 
-            
-    
-    
-    
-    
-    
+
+
+
+
+
     </>
   )
 }
