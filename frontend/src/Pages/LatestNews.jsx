@@ -1,10 +1,37 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+
+
 
 function  LatestNews() {
+    const [newsData, setNewsData] = useState([]);
+
+    useEffect(() => {
+      // Make the API call to fetch news data
+      axios.get('http://localhost:8085/news/get/demo-title')
+        .then(response => {
+          setNewsData(response.data); // Update the state with the fetched news data
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log('Error fetching news:', error);
+        });
+    }, []);
   return (
     
 <>
+
+<div>
+    {newsData.map(item => (
+      <div key={item.id}>
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+      </div>
+    ))}
+  </div>
 
 <nav class="nav">
                 <i class="uil uil-bars navOpenBtn"></i>
@@ -36,7 +63,7 @@ function  LatestNews() {
             <div class='col-sm-7 m-4'>
                 <h2> ख़बरों की ख़बर </h2>
              </div>
-            <div class="card pt-4" >
+            {/* <div class="card pt-4" >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" src="/images/image2.jpg" alt="Suresh Dasari Card" />
@@ -79,13 +106,29 @@ function  LatestNews() {
                         </div>
                     </div>
                 </div>
+            </div> */}
+            {newsData.map(newsItem => (
+        <div className="card pt-4" key={newsItem._id}>
+          <div className="row no-gutters">
+            <div className="col-sm-3">
+              <img className="card-img" src={`data:image/jpeg;base64,${newsItem.imageData}`} alt={newsItem.title} />
             </div>
+            <div className="col-sm-7">
+              <div className="card-body">
+                <h5 className="card-title">{newsItem.title}</h5>
+                <p className="card-text">{newsItem.content}</p>
+                <a href="#" className="btn btn-primary">Know More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
 
 
 
 </>
 
-  )
+  );
 }
 
-export default LatestNews
+export default LatestNews;
