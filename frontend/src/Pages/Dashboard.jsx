@@ -1,22 +1,18 @@
- fix/1
+
 import {Button, Card , CardBody , Container, Form ,Input , Label} from 'reactstrap';
 import { useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
 import {useEffect,useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
- master
  
  
  
 const Dashboard = () => {
 
     const editor = useRef(null);
-    const [content, setContent] = useState('');
+    
 
    
-fix/1
 
 
    return(
@@ -50,8 +46,7 @@ fix/1
     }
       getData();
    },)
-    
- master
+
  
    <Card className='shadow-sm'>
    
