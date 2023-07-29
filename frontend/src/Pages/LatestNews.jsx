@@ -8,18 +8,24 @@ import axios from 'axios';
 
 function LatestNews() {
   const [newsData, setNewsData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     // Make the API call to fetch news data
-    axios.get('http://localhost:8085/news/get-News-By-Category/Sports')
+    axios.get(`http://localhost:8085/news/getNews?category=Sports&pageSize=2&page=${currentPage}`)
       .then(response => {
-        setNewsData(response.data); // Update the state with the fetched news data
+        setNewsData(response.data.paginatedNewsArticles); // Update the state with the fetched news data
+        console.log(response.data.paginatedNewsArticles);
+        setTotalPages(response.data.totalPages);
+        console.log(totalPages);
         console.log(response.data);
+        console.log(response.data.page);
       })
       .catch(error => {
         console.log('Error fetching news:', error);
       });
-  }, []);
+  }, [currentPage]);
   return (
 
     <>
@@ -112,24 +118,40 @@ function LatestNews() {
                     </div>
                 </div>
             </div> */}
+            <div>
       {newsData.map(newsItem => (
-        <Link to={`/news/${newsItem.slug}`} key={newsData._id}>
-          <div className="card pt-4" key={newsItem._id}>
-            <div className="row no-gutters">
-              <div className="col-sm-3">
-                <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
-              </div>
-              <div className="col-sm-7">
-                <div className="card-body">
-                  <h5 className="card-title">{newsItem.title}</h5>
-                  <p className="card-text">{newsItem.content}</p>
-                  <a href="#" className="btn btn-primary">Know More</a>
+
+          <Link to={`/news/${newsItem.slug}`} key={newsData._id}>
+            <div className="card pt-4" key={newsItem._id}>
+              <div className="row no-gutters">
+                <div className="col-sm-3">
+                  <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
+                </div>
+                <div className="col-sm-7">
+                  <div className="card-body">
+                    <h5 className="card-title">{newsItem.title}</h5>
+                    <p className="card-text">{newsItem.content}</p>
+                    <a href="#" className="btn btn-primary">Know More</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+          ))}
+          <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button onClick={() => setCurrentPage((currentPage) => currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        
+        
+      
+      </div>
 
 
 
