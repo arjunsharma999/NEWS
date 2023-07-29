@@ -1,22 +1,42 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 
-export default class Login extends Component {
+
+const LoginWrapper = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = (jwtToken) => {
+    localStorage.setItem('jwtToken', jwtToken);
+    navigate('/admin/dashboard'); // Redirect to /admin/dashboard
+  };
+
+  return <Login onLogin={handleLogin} />;
+};
+
+export default LoginWrapper;
+
+
+
+ class Login extends Component {
 
   constructor (props){
     super (props)
     this.state={
-      email:"",
+      username:"",
       password:""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
+  handleLogin = (jwtToken)=>{
+    localStorage.setItem('jwtToken', jwtToken);
+  };
 
   handleSubmit (e){
     e.preventDefault();
-    const{email, password}=this.state;
-    console.log(email,password);
-    fetch("http://localhost:5000/loginuser", {
+    const{username, password}=this.state;
+    console.log(username,password);
+    fetch("http://localhost:8085/admin/login", {
       method: "post",
       crossDomain: true,
       headers: {
@@ -25,14 +45,34 @@ export default class Login extends Component {
         "Acces-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        email,
+        username,
         password,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "userRegister")
-      });
+    .then((response) => {
+      if (response.status === 200) {
+        // successful login
+        return response.json();
+      } else if (response.status === 401) {
+        // Status code 401 indicates wrong credentials
+        throw new Error("Username and password not valid");
+      } else {
+        // Handle other status codes
+        throw new Error("Server error");
+      }
+    })
+    .then((data) => {
+       // Process the data
+       console.log(data);
+       // Handle successful login and navigate to the dashboard
+       //this.handleLogin(data.accessToken);
+       //this.props.history.push("/admin/dashboard");
+       this.props.onLogin(data.jwtToken);
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error("Error:", error.message);
+    });
 
   }
   render() {
@@ -70,10 +110,10 @@ export default class Login extends Component {
         <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-4 col-lg-3 pt-5  ">
           <label></label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            placeholder="Enter email"
-            onChange={(e) => this.setState({ email: e.target.value })}
+            placeholder="Enter username"
+            onChange={(e) => this.setState({ username: e.target.value })}
           />
         </div>
 
@@ -115,3 +155,4 @@ export default class Login extends Component {
     )
   }
 }
+//export default withRouter(Login);
