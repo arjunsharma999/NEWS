@@ -19,10 +19,8 @@ import About from './Pages/About'
 
 function App() {
   return (
-    <Router>
     
-
-        
+    <Router>        
             <Routes>
               <Route exact path="/" element={<Login />} />
               <Route path="/Sign-in" element={<Login />} />
