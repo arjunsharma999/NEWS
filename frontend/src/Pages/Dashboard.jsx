@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     const editor = useRef(null);
 
-    const [content, setContent] = useState([])
+    const [content, setContent] = useState('')
 
     const [record, setRecord] = useState([])
 

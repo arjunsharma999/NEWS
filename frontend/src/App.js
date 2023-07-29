@@ -16,6 +16,7 @@ import LoginWrapper from './components/AdminPage/Login'
 import PageMain from './Pages/PageMain'
 import Navbar from './components/AdminPage/Navbar'
 import About from './Pages/About'
+import Modify from './Pages/Modify'
 
 
 
@@ -37,6 +38,7 @@ function App() {
               <Route path="/admin/Log-in" element={<LoginWrapper  />} />
               <Route path="/admin/Sign-up" element={<Signup />} />
               <Route path="/admin/Dashboard" element={<Dashboard/>}/>
+              <Route path="/Modify-post" element={<Modify/>}/>
               <Route path="/Article" element={<PageMain/>}/>   
               <Route path="/Navbar" element={<Navbar/>}/>
               <Route path="/About" element={<About/>}/>
