@@ -14,6 +14,7 @@ import LatestNews from './Pages/LatestNews'
 import PageMain from './Pages/PageMain'
 import Navbar from './components/AdminPage/Navbar'
 import About from './Pages/About'
+import Modify from './Pages/Modify'
 
 
 
@@ -37,6 +38,7 @@ function App() {
               <Route path="/Article" element={<PageMain/>}/>   
               <Route path="/Navbar" element={<Navbar/>}/>
               <Route path="/About" element={<About/>}/>
+              <Route path="/Modify-post" element={<Modify/>}/>
             </Routes>
       
       

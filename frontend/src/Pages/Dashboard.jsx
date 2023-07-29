@@ -1,6 +1,8 @@
 import {Button, Card , CardBody , Container, Form ,Input , Label} from 'reactstrap';
 import { useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
+import { Link } from 'react-router-dom';
+import Modify from './Modify';
  
  
  
@@ -83,8 +85,13 @@ const Dashboard = () => {
          </div>
 
          <Container className='text-center'>
-            <Button color='primary'> Create post</Button>
-            
+            <Link to="/Home">
+            <Button color='primary me-2'> Create post</Button>
+            </Link>
+            <Link to="/Modify-post">
+            <Button color='danger'> Modify</Button>
+            </Link>
+    
          </Container>
 
 
