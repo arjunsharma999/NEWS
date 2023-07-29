@@ -11,13 +11,13 @@ import News from './Pages/News'
 import Health from './Pages/Health'
 import ScienceTech from './Pages/ScienceTech'
 import LatestNews from './Pages/LatestNews'
+
 import NewsArticle from './Pages/NewsArticle'
 import LoginWrapper from './components/AdminPage/Login'
 import PageMain from './Pages/PageMain'
 import Navbar from './components/AdminPage/Navbar'
 import About from './Pages/About'
 import Modify from './Pages/Modify'
-
 
 
 function App() {
@@ -32,14 +32,15 @@ function App() {
               <Route path="/Health" element={<Health/>}/> 
               <Route path="/Science&Tech" element={<ScienceTech/>}/>   
               <Route path="/LatestNews" element={<LatestNews/>}/>   
-              <Route path="/news/:slug" component={<NewsArticle/>} /> 
-              <Route path="/admin/Log-in" element={<LoginWrapper  />} />
+              <Route path="/news/:slug" element={<NewsArticle/>} /> 
+              <Route path="/admin/Log-in" element={<LoginWrapper />} />
               <Route path="/admin/Sign-up" element={<Signup />} />
               <Route path="/admin/Dashboard" element={<Dashboard/>}/>
               <Route path="/Modify-post" element={<Modify/>}/>
               <Route path="/Article" element={<PageMain/>}/>   
               <Route path="/Navbar" element={<Navbar/>}/>
               <Route path="/About" element={<About/>}/>
+
             </Routes>
       
       

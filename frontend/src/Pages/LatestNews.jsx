@@ -6,65 +6,71 @@ import axios from 'axios';
 
 
 
-function  LatestNews() {
-    const [newsData, setNewsData] = useState([]);
+function LatestNews() {
+  const [newsData, setNewsData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-    useEffect(() => {
-      // Make the API call to fetch news data
-      axios.get('http://localhost:8085/news/get/demo-title')
-        .then(response => {
-          setNewsData(response.data); // Update the state with the fetched news data
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.log('Error fetching news:', error);
-        });
-    }, []);
+  useEffect(() => {
+    // Make the API call to fetch news data
+    axios.get(`http://localhost:8085/news/getNews?category=Sports&pageSize=2&page=${currentPage}`)
+      .then(response => {
+        setNewsData(response.data.paginatedNewsArticles); // Update the state with the fetched news data
+        console.log(response.data.paginatedNewsArticles);
+        setTotalPages(response.data.totalPages);
+        console.log(totalPages);
+        console.log(response.data);
+        console.log(response.data.page);
+      })
+      .catch(error => {
+        console.log('Error fetching news:', error);
+      });
+  }, [currentPage]);
   return (
-    
-<>
 
-<div>
+    <>
+
+      {/* <div>
     {newsData.map(item => (
       <div key={item.id}>
         <h3>{item.title}</h3>
         <p>{item.description}</p>
       </div>
     ))}
-  </div>
+  </div> */}
 
-<nav class="nav">
-                <i class="uil uil-bars navOpenBtn"></i>
-                <a href="#" class="logo"> <img src="/images/logo.jpeg" alt="" /></a>
-                <ul class="nav-links">
-                    <i class="uil uil-times navCloseBtn"></i>
-                    <li><a href="#">ख़बरों की ख़बर</a></li> 
-                    <Link to={'/Home'}><a href="#">$$$</a></Link>
-                    <li><a href="#">मंथन</a></li>
-                    <Link to={'/News'}><a href="#">खबरे</a></Link>
-                    <li><a href="#">साहित्य</a></li>
-                    <li><a href="#">संपदकी</a></li>
-                    <li><a href="#">पहाड़ रैबार</a></li>
-                    <li><a href="#">विज्ञान और तकनीक</a></li>
-                    <li><a href="#">वीडियो</a></li>
-                    <li><a href="#">स्वस्थ्य</a></li>
-                    <li><a href="#">शहरनामा</a></li>
-                    <li><a href="#">हमारे बारे में</a></li>
-                    <Link  to={'/Contact-us'}><a href="#">संपर्क</a></Link>
-                </ul>
-                <i class="uil uil-search search-icon" id="searchIcon"></i>
-                <div class="search-box">
-                    <i class="uil uil-search search-icon"></i>
-                    <input type="text" placeholder="Search here..." />
-                </div>
-            </nav>
+      <nav class="nav">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="#" class="logo"> <img src="/images/logo.jpeg" alt="" /></a>
+        <ul class="nav-links">
+          <i class="uil uil-times navCloseBtn"></i>
+          <li><a href="#">ख़बरों की ख़बर</a></li>
+          <Link to={'/Home'}><a href="#">$$$</a></Link>
+          <li><a href="#">मंथन</a></li>
+          <Link to={'/News'}><a href="#">खबरे</a></Link>
+          <li><a href="#">साहित्य</a></li>
+          <li><a href="#">संपदकी</a></li>
+          <li><a href="#">पहाड़ रैबार</a></li>
+          <li><a href="#">विज्ञान और तकनीक</a></li>
+          <li><a href="#">वीडियो</a></li>
+          <li><a href="#">स्वस्थ्य</a></li>
+          <li><a href="#">शहरनामा</a></li>
+          <li><a href="#">हमारे बारे में</a></li>
+          <Link to={'/Contact-us'}><a href="#">संपर्क</a></Link>
+        </ul>
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">
+          <i class="uil uil-search search-icon"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+      </nav>
 
 
-            <div class='col-sm-7 m-4'>
-                <h2> ख़बरों की ख़बर </h2>
-             </div>
-          feature/admin-dashboard-login-protection
-            {/* <div class="card pt-4" >
+      <div class='col-sm-7 m-4'>
+        <h2> ख़बरों की ख़बर </h2>
+      </div>
+
+      {/* <div class="card pt-4" >
 
             
             <div class="card pt-4" >
@@ -112,26 +118,44 @@ function  LatestNews() {
                     </div>
                 </div>
             </div> */}
-            {newsData.map(newsItem => (
-        <div className="card pt-4" key={newsItem._id}>
-          <div className="row no-gutters">
-            <div className="col-sm-3">
-              <img className="card-img" src={`data:image/jpeg;base64,${newsItem.imageData}`} alt={newsItem.title} />
-            </div>
-            <div className="col-sm-7">
-              <div className="card-body">
-                <h5 className="card-title">{newsItem.title}</h5>
-                <p className="card-text">{newsItem.content}</p>
-                <a href="#" className="btn btn-primary">Know More</a>
+            <div>
+      {newsData.map(newsItem => (
+
+          <Link to={`/news/${newsItem.slug}`} key={newsData._id}>
+            <div className="card pt-4" key={newsItem._id}>
+              <div className="row no-gutters">
+                <div className="col-sm-3">
+                  <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
+                </div>
+                <div className="col-sm-7">
+                  <div className="card-body">
+                    <h5 className="card-title">{newsItem.title}</h5>
+                    <p className="card-text">{newsItem.content}</p>
+                    <a href="#" className="btn btn-primary">Know More</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      ))}
+          </Link>
+          ))}
+          <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button onClick={() => setCurrentPage((currentPage) => currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        
+        
+      
+      </div>
 
 
 
-</>
+    </>
 
   );
 }
