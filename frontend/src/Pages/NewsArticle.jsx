@@ -21,6 +21,13 @@ function NewsArticle({ match }) {
       });
   }, [slug]);
 
+  const renderFormattedContent = (htmlContent) => {
+    if (typeof htmlContent !== 'string') {
+      return null;
+    }
+    return { __html: htmlContent };
+  };
+
   return (
     <>
       <div className="card pt-4" key={newsData._id}>
@@ -31,7 +38,7 @@ function NewsArticle({ match }) {
           <div className="col-sm-7">
             <div className="card-body">
               <h5 className="card-title">{newsData.title}</h5>
-              <p className="card-text">{newsData.content}</p>
+              <div dangerouslySetInnerHTML={renderFormattedContent(newsData.content)} />
               <a href="#" className="btn btn-primary">Know More</a>
             </div>
           </div>
