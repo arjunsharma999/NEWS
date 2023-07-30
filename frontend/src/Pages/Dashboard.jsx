@@ -5,47 +5,100 @@ import JoditEditor from 'jodit-react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-
-
-
+import axios from 'axios';
 
 const Dashboard = () => {
-
     const editor = useRef(null);
-
-    const [content, setContent] = useState('')
-
     const [record, setRecord] = useState([])
-
     const getData = () => {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(resposne => resposne.json())
             .then(res => setRecord(res))
     };
-    const hasValidJwtToken = () => {
-        const jwtToken = localStorage.getItem('jwtToken');
-        if (jwtToken) {
-            return true;
-        }
-        return false; // Return false if the token is not present
-    };
-    //localStorage.setItem('jwtToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJ1c2VybmFtZSI6InJlZ2lvbmFsIn0sImlhdCI6MTY5MDQ4NzAzMiwiZXhwIjoxNjkwNDg3OTMyfQ.mxhDu3sK4EUEBtwl1l97CMknEwVWhaggPvccIbKcg-c');
 
+    const validateUser = async () => {
+        try {
+            const response = await axios.get("http://localhost:8085/admin/validate-user", {
+                withCredentials: true, // This includes cookies in the request
+            });
+            console.log(response.data);
+            if (response.status === 200) {
+                console.log('Cookie exists!');
+                // The cookie exists, so the user is authenticated. Proceed to show the Dashboard or any other protected content.
+                return true;
+            } else {
+                console.log('Cookie does not exist!');
+                // The cookie does not exist, so the user is not authenticated. Redirect the user to the login page or handle it as needed.
+                return false;
+            }
+        } catch (error) {
+            console.log('Error checking cookie:', error);
+            return false;
+        }
+
+    }
+    
     const navigate = useNavigate();
     useEffect(() => {
-        const isAuthenticated = hasValidJwtToken();
-
-        if (!isAuthenticated) {
-
-            navigate('/admin/Log-in');
-
-        }
+            validateUser().then(isAuthenticated => {
+                if (!isAuthenticated) {
+                    navigate('/admin/Log-in');
+                }
+            }).catch(error => {
+                console.log('Error checking authentication:', error);
+                navigate('/admin/Log-in');
+              });
         getData();
-    },)
+    },[]);
 
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [category, setCategory] = useState('Sports');
+    const [selectedImage, setSelectedImage] = useState(null); // State to hold the selected image
+    const imageInputRef = useRef(null); // Ref to access the file input element
 
+    // Function to handle image selection
+    const handleImageSelect = (event) => {
+        setSelectedImage(event.target.files[0]); // Assuming you are selecting only one image
+    };
 
+    const handleCategorySelect = (event) => {
+        setCategory(event.target.value); // Update the category state when the user makes a selection
+    };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('content', content);
+        formData.append('category', category);
+        formData.append('image', selectedImage); // Append the selected image to the form data
+
+        console.log(title);
+        console.log(category);
+        console.log(content);
+
+        try {
+            const response = await axios.post('http://localhost:8085/news/create', formData, {
+                withCredentials: true, // This includes cookies in the request
+            });
+            console.log('News article created:', response.data);
+            // Handle the response from the API as needed
+        } catch (error) {
+            console.log('Error creating news article:', error);
+            // Handle the error if the API call fails.
+        }
+    };
+
+    // const setEditorFont = () => {
+    //     if (editor.current) {
+    //         // Access the underlying DOM element of the editor
+    //         const editorElement = editor.current.container;
+
+    //         // Set the custom font
+    //         editorElement.style.fontFamily = "'Kruti Dev 010', sans-serif";
+    //     }
+    // };
 
     return (
         <div className='wrapper'>
@@ -60,7 +113,7 @@ const Dashboard = () => {
                         <div className='my-3 m-5'>
 
                             <Label For="title">Post Tittle</Label>
-                            <Input type="text" placeholder='Title' name="" id="title" />
+                            <Input type="text" placeholder='Title' name="" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
 
                         </div>
 
@@ -72,15 +125,21 @@ const Dashboard = () => {
                                 ref={editor}
                                 value={content}
                                 onChange={newContent => setContent(newContent)}
-
                             />
+
                         </div>
 
                         {/* file field */}
 
                         <div className='mt-3 m-5'>
                             <Label for='image'> Select the image</Label>
-                            <Input id='image' type='file' multiple
+                            <Input
+                                id='image'
+                                type='file'
+                                accept='image/*'
+                                onChange={handleImageSelect}
+                                ref={imageInputRef} // Assign the ref to the file input element
+                                multiple={false} // Set to false to allow only one image
                             />
                         </div>
 
@@ -91,11 +150,11 @@ const Dashboard = () => {
                         <div className='my-3 m-5'>
                             <Label for="Category">Post Category</Label>
                             <Input type='select'
-                                id=''
+                                id='category'
                                 placeholder='Add category'
+                                value={category}
+                                onChange={handleCategorySelect}
                             >
-
-
                                 <option>
                                     Sports
                                 </option>
@@ -119,7 +178,9 @@ const Dashboard = () => {
 
                         <Container className='text-center'>
                             <Link to="/Home">
-                                <Button color='primary me-2'> Create post</Button>
+                                <Button color='primary me-2' onClick={handleSubmit}>
+                                    Create post
+                                </Button>
                             </Link>
                             <Link to="/Modify-post">
                                 <Button color='danger'> Modify</Button>

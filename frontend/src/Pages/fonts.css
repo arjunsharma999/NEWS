@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Kruti Dev 010';
+    src: url('./fonts/Kruti_Dev_010.ttf') format('truetype');
+  }
+  
+  .jodit {
+    font-family: 'Kruti Dev 010', sans-serif;
+  }

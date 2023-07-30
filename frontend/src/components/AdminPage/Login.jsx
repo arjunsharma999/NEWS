@@ -1,84 +1,71 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 
-
 const LoginWrapper = () => {
   const navigate = useNavigate();
 
   const handleLogin = (jwtToken) => {
-    localStorage.setItem('jwtToken', jwtToken);
+    // Retrieving JWT token from sessionStorage
+    console.log("login successfull");
     navigate('/admin/dashboard'); // Redirect to /admin/dashboard
   };
-
   return <Login onLogin={handleLogin} />;
 };
 
 export default LoginWrapper;
 
+class Login extends Component {
 
-
- class Login extends Component {
-
-  constructor (props){
-    super (props)
-    this.state={
-      username:"",
-      password:""
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: "",
+      password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  handleLogin = (jwtToken)=>{
+
+  handleLogin = (jwtToken) => {
     localStorage.setItem('jwtToken', jwtToken);
   };
 
-  handleSubmit (e){
+  handleSubmit = async (e) => {
     e.preventDefault();
-    const{username, password}=this.state;
-    console.log(username,password);
-    fetch("http://localhost:8085/admin/login", {
-      method: "post",
-      crossDomain: true,
-      headers: {
-        "content-Type": "application/json",
-        Accept: "application/json",
-        "Acces-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    })
-    .then((response) => {
+    const { username, password } = this.state;
+    console.log(username, password);
+    try {
+      const response = await fetch('http://localhost:8085/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+        credentials: 'include', // Include credentials (cookies) with the request
+      });
+      const data = await response.json();
+      console.log(data);
       if (response.status === 200) {
-        // successful login
-        return response.json();
-      } else if (response.status === 401) {
-        // Status code 401 indicates wrong credentials
-        throw new Error("Username and password not valid");
+        console.log('Login successful!');
+        // Handle successful login, e.g., redirect to the dashboard
+        this.props.onLogin(data.jwtToken);
       } else {
-        // Handle other status codes
-        throw new Error("Server error");
+        console.log('Login failed!');
+        // Handle login failure, e.g., show an error message to the user
       }
-    })
-    .then((data) => {
-       // Process the data
-       console.log(data);
-       // Handle successful login and navigate to the dashboard
-       //this.handleLogin(data.accessToken);
-       //this.props.history.push("/admin/dashboard");
-       this.props.onLogin(data.jwtToken);
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error("Error:", error.message);
-    });
-
+    } catch (error) {
+      console.log('Error during login:', error);
+      // Handle other errors, e.g., network error
+    }
   }
+
   render() {
     return (
-<>
-      <nav className="bg-secondary  navbar navbar-expand-lg  fixed-top">
+      <>
+        <nav className="bg-secondary  navbar navbar-expand-lg  fixed-top">
           <div className="container">
             <Link className="navbar-brand" to={'/Sign-in'}>
               Navbar
@@ -101,57 +88,57 @@ export default LoginWrapper;
         </nav>
 
 
-        
-      
-      <form onSubmit={this.handleSubmit}>
-    
-       <div className=' pt-5'>
 
-        <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-4 col-lg-3 pt-5  ">
-          <label></label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter username"
-            onChange={(e) => this.setState({ username: e.target.value })}
-          />
-        </div>
 
-        <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-2">
-          <label></label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-            onChange={(e) => this.setState({ password: e.target.value })}
-          />
-        </div>
+        <form onSubmit={this.handleSubmit}>
 
-        <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
+          <div className=' pt-5'>
+
+            <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-4 col-lg-3 pt-5  ">
+              <label></label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter username"
+                onChange={(e) => this.setState({ username: e.target.value })}
+              />
+            </div>
+
+            <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-2">
+              <label></label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter password"
+                onChange={(e) => this.setState({ password: e.target.value })}
+              />
+            </div>
+
+            <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
+              <div className="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id="customCheck1"
+                />
+                <label className="custom-control-label" htmlFor="customCheck1">
+                  Remember me
+                </label>
+              </div>
+            </div>
+
+            <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+            <p className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
+              Forgot <a href="#">password?</a>
+            </p>
           </div>
-        </div>
+        </form>
 
-        <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-        <p className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
-          Forgot <a href="#">password?</a>
-        </p>
-        </div>
-      </form>
-
-</>
+      </>
     )
   }
 }
