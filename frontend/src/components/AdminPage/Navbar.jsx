@@ -7,7 +7,8 @@ function Navbar() {
 
   return (
     <>
-      <nav className="nav">
+      <div className="position-relative">
+      <nav className="nav position-fixed fixed-top">
         <i className="uil uil-bars navOpenBtn"></i>
         <a href="#" className="logo">
           {" "}
@@ -70,6 +71,7 @@ function Navbar() {
           <h1>X</h1>
         </div>
       </nav>
+      
       <div className={`${showMenu ? "d-flex d-none" : "d-flex"}`}>
         <ul className="nav-links d-lg-none">
           <div className="d-flex flex-column gap-3 ">
@@ -77,7 +79,6 @@ function Navbar() {
             <Link to={"/LatestNews"}>
               <a href="#">ख़बरों की ख़बर</a>
             </Link>
-
             <Link to={"/Home"}>
               <a href="#">$$$</a>
             </Link>
@@ -117,6 +118,8 @@ function Navbar() {
           </div>
         </ul>
       </div>
+    </div>
+
     </>
   );
 }

@@ -18,6 +18,12 @@ import PageMain from './Pages/PageMain'
 import Navbar from './components/AdminPage/Navbar'
 import About from './Pages/About'
 import Modify from './Pages/Modify'
+import Footer from './components/AdminPage/Footer'
+import Manthan from './Pages/Manthan'
+import Video from './Pages/Video'
+import Pahad from './Pages/Pahad'
+import Sampadk from './Pages/Sampadk'
+import Sahitya from './Pages/Sahitya'
 
 
 function App() {
@@ -39,8 +45,14 @@ function App() {
               <Route path="/Modify-post" element={<Modify/>}/>
               <Route path="/Article" element={<PageMain/>}/>   
               <Route path="/Navbar" element={<Navbar/>}/>
+              <Route path="/Footer"  element={<Footer/>}/>
               <Route path="/About" element={<About/>}/>
-
+              <Route path="/Manthan" element={<Manthan/>}/>
+              <Route path="/Sahitya" element={<Sahitya/>}/>
+              <Route path="/Sampadk" element={<Sampadk/>}/>
+              <Route path="/Padah-rabar" element={<Pahad/>}/>
+              <Route path="/Video" element={<Video/>}/>
+              <Route path="/shernama" element={<shernama/>}/>
             </Routes>
       
       

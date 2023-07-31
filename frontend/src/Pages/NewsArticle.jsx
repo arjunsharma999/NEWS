@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Navbar from '../components/AdminPage/Navbar';
+import Footer from '../components/AdminPage/Footer';
+
 
 function NewsArticle({ match }) {
   const [newsData, setNewsData] = useState({});
@@ -30,6 +33,9 @@ function NewsArticle({ match }) {
 
   return (
     <>
+         
+         <Navbar/>
+
       <div className="card pt-4" key={newsData._id}>
         <div className="row no-gutters">
           <div className="col-sm-3">
@@ -44,6 +50,8 @@ function NewsArticle({ match }) {
           </div>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }

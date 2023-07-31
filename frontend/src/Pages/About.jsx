@@ -2,66 +2,31 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import Navbar from '../components/AdminPage/Navbar';
+import Footer from '../components/AdminPage/Footer';
 
 function About() {
 
-    const Navbar = () => {
-        return <h1><Navbar /></h1>
-    }
 
     return (
 
         <>
 
-            <nav class="nav">
-                <i class="uil uil-bars navOpenBtn"></i>
-                <a href="#" class="logo"> <img src="/images/logo.jpeg" alt="" /></a>
-                <ul class="nav-links">
-                    <i class="uil uil-times navCloseBtn"></i>
-                    <Link to={'/LatestNews'}><a href="#">ख़बरों की ख़बर</a></Link>
-
-                    <Link to={'/Home'}><a href="#">$$$</a></Link>
-
-                    <li><a href="#">मंथन</a></li>
-                    <Link to={'/News'}><a href="#">खबरे</a></Link>
-                    <li><a href="#">साहित्य</a></li>
-                    <li><a href="#">संपदकी</a></li>
-                    <li><a href="#">पहाड़ रैबार</a></li>
-                    <Link to={'/Science&Tech'}><a href="#">विज्ञान और तकनीक</a></Link>
-                    <li><a href="#">वीडियो</a></li>
-                    <Link to={'/Health'}><a href="#">स्वस्थ्य</a></Link>
-                    <li><a href="#">शहरनामा</a></li>
-                    <li><a href="#">हमारे बारे में</a></li>
-                    <Link to={'/Contact-us'}><a href="#">संपर्क</a></Link>
-                </ul>
-                <i class="uil uil-search search-icon" id="searchIcon"></i>
-                <div class="search-box">
-                    <i class="uil uil-search search-icon"></i>
-                    <input type="text" placeholder="Search here..." />
-                </div>
-            </nav>
-
-
-
-            <div class='Top-About'>
-                <img src="images/BG-About.jpg" alt="" />
-            </div>
-
-
-
+         <Navbar/>
+            <div className='abouthead'>
             <h2>संस्थापक बी. शंकर
                 सम्पादक गंगा असनोड़ा
                 साहित्य सम्पादक डॉ प्रीतम अपच्छयांण, उमा घिल्डियाल</h2>
+             </div>
 
 
+        
 
-            <div class='About-txt'>
-
-                <div className='col-md-4'>
+                <div className='  d-flex justify-content-around col-md-3  '>
                     <h2>संस्थापक बी. शंकर
                         सम्पादक गंगा असनोड़ा
                         साहित्य सम्पादक डॉ प्रीतम अपच्छयांण, उमा घिल्डियाल</h2>
                 </div>
+                <div class='About-txt'>
                 <h2>
                     रीजनल रिपोर्टर हिमालयी सरोकारों से साक्षात्कार के उद्देश्य के साथ फरवरी 2007 में संस्थापक संपादक स्व.बी.शंकर एवं उनके उत्साही साथियों की ओर से मीडिया संस्थान के रूप में स्थापित की गई एक मासिक पत्रिका थी। शुरुआती दौर में संसाधनों के नितांत अभाव में शुरू की गई मासिक पत्रिका को हिमालयी सरोकारों से जुड़े कई साथियों ने प्रकाशन के लिए सहयोग किया।
                     रीजनल रिपोर्टर सिर्फ स्थानीयता न होकर समस्त हिमालयन रीजन का प्रतिनिधित्व करने वाले संस्थान का नाम रखा गया। चूंकि उत्तराखण्ड एक हिमालयी राज्य है तथा पत्रिका का प्रकाशन इसी हिमालयी राज्य के एक महत्त्वपूर्ण शहर श्रीनगर से होता है। अतः इस पत्रिका में
@@ -74,7 +39,7 @@ function About() {
 
 
 
-
+   <Footer/>
 
         </>
     )
