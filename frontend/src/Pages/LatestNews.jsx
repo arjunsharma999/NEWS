@@ -43,8 +43,8 @@ function LatestNews() {
 
      <Navbar/>
 
-     <div className="container">
-            <div class='col-sm-7 my-4 '>
+     <div className="container my-5">
+            <div class='col-sm-7 my-5 '>
                 <h2> ख़बरों की ख़बर </h2>
              </div>            
             <div class="card my-4" >
@@ -116,18 +116,21 @@ function LatestNews() {
             </div>
           </Link>
           ))}
+          <div className="container my-5 d-flex gap-4 justify-content-center">
           <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
             disabled={currentPage === 1}
+            className='btn '
           >
             Previous
           </button>
           <button onClick={() => setCurrentPage((currentPage) => currentPage + 1)}
             disabled={currentPage === totalPages}
+            className='btn '
           >
             Next
           </button>
         
-        
+          </div>
       
       </div>
 
