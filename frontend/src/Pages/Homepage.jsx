@@ -317,6 +317,51 @@ function Homepage() {
               }}
               autoplay={{
                 delay: 2500,
+                disableOnInteraction: true,
+              }}
+              modules={[FreeMode, Autoplay, Pagination]}
+              className="mySwiper my-5"
+            >
+              {ytData.map((ytItem) => (
+                <SwiperSlide key={ytItem.id}>
+                  <div className="card" >
+                    <div className="video-container">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${ytItem.videoId}`}
+                        title={ytItem.title}
+                        width="100%"
+                        height="200px"
+                        allowFullScreen
+                        className="card-img-top rounded"
+                      ></iframe>
+                      <div className="card-body d-flex flex-column justify-content-between">
+                        <h5 className="card-title my-2 card-title-fixed-length" style={{ marginTop: "10px" }}>
+                          {ytItem.title}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+          {/* <div className="container">
+            <h2 className="my-4">Videos</h2>
+
+            <Swiper
+              breakpoints={{
+                740: { slidesPerView: 4 },
+                320: { slidesPerView: 1 }
+              }}
+              slidesPerView={4}
+              spaceBetween={30}
+              freeMode={true}
+              pagination={{
+                clickable: true,
+              }}
+              autoplay={{
+                delay: 2500,
                 disableOnInteraction: false,
               }}
               modules={[FreeMode, Autoplay, Pagination]}
@@ -324,16 +369,6 @@ function Homepage() {
             >
               {ytData.map(ytItem => (
                 <SwiperSlide key={ytItem.id}>
-                  {/* <div className="card" onClick={() => handleCardClick(ytItem.videoId)}>
-                  <div class="card-body border rounded p-2 card-body-fixed-height">
-                    <h5 class="card-title my-2 card-title-fixed-length">{ytItem.title}</h5>
-                    <img
-                      width="100%"
-                      height="200px"
-                      src={ytItem.thumbnail}
-                      className="card-img-top rounded"
-                      alt="..."
-                    ></img> */}
                   <div className="card" onClick={() => handleCardClick(ytItem.videoId)}>
                     <img
                       src={ytItem.thumbnail}
@@ -345,30 +380,13 @@ function Homepage() {
                       <h5 className="card-title my-2 card-title-fixed-length" style={{ marginTop: "10px" }}>
                         {ytItem.title}
                       </h5>
-                      {/* <a
-                      href={`https://www.youtube.com/watch?v=${ytItem.videoId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline-success btn-sm"
-                    >
-                      Watch Video
-                    </a> */}
-                      {/* <p class="my-2 truncate">
-              <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
-              </p>
-              <a href="" class="btn btn-outline-success btn-sm ">
-                Read More
-              </a>
-              <a href="" class="btn btn-outline-danger btn-sm mx-2">
-                Like
-              </a> */}
                     </div>
                   </div>
 
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </div> */}
 
           <div class=" ccar card my-4" >
             <div class="row no-gutters">
