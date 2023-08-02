@@ -12,7 +12,7 @@ function Contact() {
 <div className="container justify-content-center d-flex contectheight">
       <div className="row">
         <div className="col-lg-6 col-12 d-flex align-items-center justify-content-center ">
-          <img className="img mx-5 w-50" src="/images/contect.jpeg" alt="" />
+          <img className="img mx-5 w-50" src="images\Contact_image.png" alt="" />
         </div>
         <div className="col-lg-6 col-12 d-flex justify-content-center ">
           <div className="d-flex flex-column center gap-3 align-items-center justify-content-center">

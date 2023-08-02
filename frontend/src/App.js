@@ -52,7 +52,7 @@ function App() {
               <Route path="/Sampadk" element={<Sampadk/>}/>
               <Route path="/Padah-rabar" element={<Pahad/>}/>
               <Route path="/Video" element={<Video/>}/>
-              <Route path="/shernama" element={<shernama/>}/>
+              <Route path="/Shernama" element={<shernama/>}/>
             </Routes>
       
       
