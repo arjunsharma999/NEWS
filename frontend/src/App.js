@@ -37,11 +37,12 @@ function App() {
               <Route path="/News" element={<News/>}/>  
               <Route path="/Health" element={<Health/>}/> 
               <Route path="/Science&Tech" element={<ScienceTech/>}/>   
-              <Route path="/LatestNews" element={<LatestNews/>}/>   
-              <Route path="/news/:slug" element={<NewsArticle/>} /> 
+              <Route path="/News/:category" element={<LatestNews/>}/>   
+              <Route path="/news-article/:slug" element={<NewsArticle/>} /> 
               <Route path="/admin/Log-in" element={<LoginWrapper />} />
               <Route path="/admin/Sign-up" element={<Signup />} />
               <Route path="/admin/Dashboard" element={<Dashboard/>}/>
+              <Route path="/admin/edit/:slug" element={<Dashboard/>}/>
               <Route path="/Modify-post" element={<Modify/>}/>
               <Route path="/Article" element={<PageMain/>}/>   
               <Route path="/Navbar" element={<Navbar/>}/>
@@ -52,7 +53,7 @@ function App() {
               <Route path="/Sampadk" element={<Sampadk/>}/>
               <Route path="/Padah-rabar" element={<Pahad/>}/>
               <Route path="/Video" element={<Video/>}/>
-              <Route path="/shernama" element={<shernama/>}/>
+              <Route path="/Shernama" element={<shernama/>}/>
             </Routes>
       
       
