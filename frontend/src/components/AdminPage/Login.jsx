@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../Constants';
 
 const LoginWrapper = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ class Login extends Component {
     const { username, password } = this.state;
     console.log(username, password);
     try {
-      const response = await fetch('http://localhost:8085/admin/login', {
+      const response = await fetch(`${baseUrl}/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

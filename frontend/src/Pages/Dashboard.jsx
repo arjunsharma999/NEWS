@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { baseUrl } from '../Constants';
 
 const Dashboard = () => {
     const { slug } = useParams();
@@ -27,7 +28,7 @@ const Dashboard = () => {
 
     const validateUser = async () => {
         try {
-            const response = await axios.get("http://localhost:8085/admin/validate-user", {
+            const response = await axios.get(`${baseUrl}/admin/validate-user`, {
                 withCredentials: true, // This includes cookies in the request
             });
             console.log(response.data);
@@ -70,7 +71,7 @@ const Dashboard = () => {
     const fetchDataForModification = async (slug) => {
         setAction("Modify")
         try {
-            const response = await axios.get(`http://localhost:8085/news/get/${slug}`);
+            const response = await axios.get(`${baseUrl}/news/get/${slug}`);
             console.log(response.data)
             setdataForModify(response.data);
             setTitle(response.data.title);
@@ -105,7 +106,7 @@ const Dashboard = () => {
 
         if (action === "Create") {
             try {
-                const response = await axios.post('http://localhost:8085/news/create', formData, {
+                const response = await axios.post(`${baseUrl}/news/create`, formData, {
                     withCredentials: true, // This includes cookies in the request
                 });
                 console.log('News article created:', response.data);
@@ -117,7 +118,7 @@ const Dashboard = () => {
         }
         else if(action === "Modify"){
             try {
-                const response = await axios.post(`http://localhost:8085/news/modify/${dataForModify._id}`, formData, {
+                const response = await axios.post(`${baseUrl}/news/modify/${dataForModify._id}`, formData, {
                     withCredentials: true, // This includes cookies in the request
                 });
                 console.log('News article created:', response.data);

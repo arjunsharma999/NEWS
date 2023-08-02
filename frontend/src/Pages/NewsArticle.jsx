@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
+import { baseUrl } from '../Constants';
 
 
 function NewsArticle({ match }) {
@@ -14,7 +15,7 @@ function NewsArticle({ match }) {
     // Fetch the news data by its ID from the backend API
 
     //console.log(slug);
-    axios.get(`http://localhost:8085/news/get/${slug}`)
+    axios.get(`${baseUrl}/news/get/${slug}`)
       .then(response => {
         setNewsData(response.data);
         //console.log(response.data);
