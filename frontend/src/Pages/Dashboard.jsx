@@ -2,14 +2,23 @@
 import { Button, Card, CardBody, Container, Form, Input, Label } from 'reactstrap';
 import { useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 
 const Dashboard = () => {
+    const { slug } = useParams();
     const editor = useRef(null);
     const [record, setRecord] = useState([])
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [category, setCategory] = useState('ख़बरों की ख़बर');
+    const [selectedImage, setSelectedImage] = useState(null); // State to hold the selected image
+    const imageInputRef = useRef(null); // Ref to access the file input element
+    const [dataForModify, setdataForModify] = useState(null);
+    const [action, setAction] = useState('Create');
+
     const getData = () => {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(resposne => resposne.json())
@@ -37,25 +46,41 @@ const Dashboard = () => {
         }
 
     }
-    
     const navigate = useNavigate();
-    useEffect(() => {
-            validateUser().then(isAuthenticated => {
-                if (!isAuthenticated) {
-                    navigate('/admin/Log-in');
-                }
-            }).catch(error => {
-                console.log('Error checking authentication:', error);
-                navigate('/admin/Log-in');
-              });
-        getData();
-    },[]);
 
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [category, setCategory] = useState('Sports');
-    const [selectedImage, setSelectedImage] = useState(null); // State to hold the selected image
-    const imageInputRef = useRef(null); // Ref to access the file input element
+    useEffect(() => {
+        validateUser().then(isAuthenticated => {
+            if (!isAuthenticated) {
+                navigate('/admin/Log-in');
+            }
+        }).catch(error => {
+            console.log('Error checking authentication:', error);
+            navigate('/admin/Log-in');
+        });
+        getData();
+        if (slug) {
+            fetchDataForModification(slug);
+        }
+        console.log(action);
+
+    }, [slug]);
+    console.log(slug);
+    
+
+    const fetchDataForModification = async (slug) => {
+        setAction("Modify")
+        try {
+            const response = await axios.get(`http://localhost:8085/news/get/${slug}`);
+            console.log(response.data)
+            setdataForModify(response.data);
+            setTitle(response.data.title);
+            setContent(response.data.content);
+            setCategory(response.data.category);
+        }
+        catch (error) {
+            console.log("Error fetching data: ", error);
+        }
+    }
 
     // Function to handle image selection
     const handleImageSelect = (event) => {
@@ -78,15 +103,29 @@ const Dashboard = () => {
         console.log(category);
         console.log(content);
 
-        try {
-            const response = await axios.post('http://localhost:8085/news/create', formData, {
-                withCredentials: true, // This includes cookies in the request
-            });
-            console.log('News article created:', response.data);
-            // Handle the response from the API as needed
-        } catch (error) {
-            console.log('Error creating news article:', error);
-            // Handle the error if the API call fails.
+        if (action === "Create") {
+            try {
+                const response = await axios.post('http://localhost:8085/news/create', formData, {
+                    withCredentials: true, // This includes cookies in the request
+                });
+                console.log('News article created:', response.data);
+                // Handle the response from the API as needed
+            } catch (error) {
+                console.log('Error creating news article:', error);
+                // Handle the error if the API call fails.
+            }
+        }
+        else if(action === "Modify"){
+            try {
+                const response = await axios.post(`http://localhost:8085/news/modify/${dataForModify._id}`, formData, {
+                    withCredentials: true, // This includes cookies in the request
+                });
+                console.log('News article created:', response.data);
+                // Handle the response from the API as needed
+            } catch (error) {
+                console.log('Error creating news article:', error);
+                // Handle the error if the API call fails.
+            }
         }
     };
 
@@ -156,30 +195,38 @@ const Dashboard = () => {
                                 onChange={handleCategorySelect}
                             >
                                 <option>
-                                    Sports
+                                    ख़बरों की ख़बर
                                 </option>
                                 <option>
-                                    Culture
+                                    मंथन
                                 </option>
                                 <option>
-                                    Festival
+                                    खबरे
                                 </option>
                                 <option>
-                                    Holy ganges
+                                    साहित्य
                                 </option>
                                 <option>
-                                    It sector
+                                    संपदकी
                                 </option>
-
-
+                                <option>
+                                    पहाड़ रैबार
+                                </option>
+                                <option>
+                                    विज्ञान और तकनीक
+                                </option>
+                                <option>
+                                    स्वस्थ्य
+                                </option>
+                                <option>
+                                    शहरनामा
+                                </option>
                             </Input>
-
                         </div>
-
                         <Container className='text-center'>
                             <Link to="/Home">
                                 <Button color='primary me-2' onClick={handleSubmit}>
-                                    Create post
+                                    {action === "Create" ? 'Create Post' : 'Save Modification'}
                                 </Button>
                             </Link>
                             <Link to="/Modify-post">

@@ -7,12 +7,12 @@ import Footer from '../components/AdminPage/Footer';
 
 function NewsArticle({ match }) {
   const [newsData, setNewsData] = useState({});
-  
+
   const { slug } = useParams();
 
   useEffect(() => {
     // Fetch the news data by its ID from the backend API
-    
+
     //console.log(slug);
     axios.get(`http://localhost:8085/news/get/${slug}`)
       .then(response => {
@@ -33,10 +33,10 @@ function NewsArticle({ match }) {
 
   return (
     <>
-         
-         <Navbar/>
 
-      <div className="card pt-4" key={newsData._id}>
+      <Navbar />
+
+      {/* <div className="card pt-4" key={newsData._id}>
         <div className="row no-gutters">
           <div className="col-sm-3">
             <img className="card-img" src={newsData.imageUrl} alt={newsData.title} />
@@ -49,9 +49,28 @@ function NewsArticle({ match }) {
             </div>
           </div>
         </div>
+      </div> */}
+
+      <div className="container my-5">
+        <div className="d-flex flex-column justify-centent-center my-5">
+          <div className='mt-5 mb-2 pagemain-img border rounded'>
+            <img src={newsData.imageUrl} alt="" />
+          </div>
+          <div>
+            <h2 className='my-3'>
+              {newsData.title}
+            </h2>
+          </div>
+          <div>
+            <p>
+              {/* <div dangerouslySetInnerHTML={renderFormattedContent(newsData.content)} /> */}
+              {newsData.content}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
