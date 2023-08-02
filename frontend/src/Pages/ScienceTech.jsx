@@ -10,11 +10,11 @@ function  ScienceTech() {
 
 <Navbar/>
 
-
-            <div class='col-sm-7 m-4'>
+           <div className=' container m-5'>
+            <div class=' free col-md-7 m-5'>
                 <h2> विज्ञान और तकनीक </h2>
              </div>
-            <div class="card pt-4" >
+            <div class="card pt-2 my-4" >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" src="/images/image2.jpg" alt="Suresh Dasari Card" />
@@ -58,6 +58,7 @@ function  ScienceTech() {
                     </div>
                 </div>
             </div>
+         </div>
 
 
 <Footer/>

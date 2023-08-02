@@ -27,12 +27,12 @@ function News() {
         <>
 
            <Navbar/>
-           <div className="container my-5">
-            <div class=' xxx col-sm-7 m-5'>
+           <div className=' container m-5'>
+            <div class=' free col-md-7 m-5'>
                 <h2> खबरे </h2>
             </div>
             <Link to={`/news/${newsData.slug}`} key={newsData._id}>
-                <div class="card my-4" >
+                {/* <div class="card my-4 pt-2" >
                     <div class="row no-gutters">
                         <div class="col-sm-3">
                             <img class="card-img" src={newsData.imageUrl}  alt={newsData.title} />
@@ -45,11 +45,11 @@ function News() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </Link>
 
 
-            <div class="card my-4" >
+            <div class="card my-5" >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" src="/images/relimage.jpg" alt="Suresh Dasari Card" />
@@ -64,7 +64,7 @@ function News() {
                 </div>
             </div>
 
-            <div class="card my-4" >
+            <div class="card my-5" >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" src="/images/image2.jpg" alt="Suresh Dasari Card" />

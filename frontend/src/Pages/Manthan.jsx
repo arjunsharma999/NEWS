@@ -8,11 +8,11 @@ function Manthan() {
        <Navbar/>
 
 
-       <div className="container">
-            <div class='col-sm-7 my-4 '>
+       <div className=' container m-5'>
+            <div class=' free col-md-7 m-5'>
                 <h2> ख़बरों की ख़बर </h2>
              </div>            
-            <div class="card my-4" >
+            <div class="card my-4 pt-2" >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" height="200px" width="100px" src="/images/image2.jpg" alt="Suresh Dasari Card" />

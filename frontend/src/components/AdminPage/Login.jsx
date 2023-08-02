@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
+
+
+
 
 const LoginWrapper = () => {
+  
+ 
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Wrong password',
+     
+    })
+  
+
   const navigate = useNavigate();
 
   const handleLogin = (jwtToken) => {
@@ -15,6 +29,10 @@ const LoginWrapper = () => {
 export default LoginWrapper;
 
 class Login extends Component {
+ 
+  
+
+  
 
   constructor(props) {
     super(props)
@@ -60,12 +78,14 @@ class Login extends Component {
       console.log('Error during login:', error);
       // Handle other errors, e.g., network error
     }
-  }
+
+
+}
 
   render() {
     return (
       <>
-       
+
         <form onSubmit={this.handleSubmit}>
 
           <div className=' pt-5'>
@@ -90,6 +110,11 @@ class Login extends Component {
               />
             </div>
 
+            {/* <div id="popup">
+              <span class="close" onclick="hidePopup()">&times;</span>
+              <p>Invalid username or password.</p>
+            </div> */}
+
             {/* <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
               <div className="custom-control custom-checkbox">
                 <input
@@ -104,7 +129,7 @@ class Login extends Component {
             </div> */}
 
             <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-">
-              <button type="submit" className="btn btn-primary">
+              <button  onClick={Swal.fire} type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
