@@ -12,7 +12,7 @@ function Navbar() {
         <i className="uil uil-bars navOpenBtn"></i>
         <a href="#" className="logo">
           {" "}
-          <img src="/images/logo.jpeg" width="20px" alt="" />
+          <img src="/images/logo.jpeg" width="15px" alt="" />
         </a>
         <ul className="nav-links">
           <i className="uil uil-times navCloseBtn"></i>
@@ -68,52 +68,37 @@ function Navbar() {
             setShowMenu(showMenu === true ? false : true);
           }}
         >
-          <h1>X</h1>
+          <h1 className="px-5">X</h1>
         </div>
       </nav>
       
-      <div className={`${showMenu ? "d-flex d-none" : "d-flex"}`}>
-        <ul className="nav-links d-lg-none">
-          <div className="d-flex flex-column gap-3 ">
+      <div className={`${showMenu ? "d-flex d-none" : "d-flex"} position-fixed znavbar`}>
+        <ul className="nav-links d-lg-none my-5">
+          <div className="d-flex flex-column gap-3 my-5 listnone">
             <i className="uil uil-times navCloseBtn"></i>
             <Link to={"/LatestNews"}>
-              <a href="#">ख़बरों की ख़बर</a>
+              <a className="linkcolour" href="#">ख़बरों की ख़बर</a>
             </Link>
             <Link to={"/Home"}>
-              <a href="#">$$$</a>
+              <a className="linkcolour" href="#">$$$</a>
             </Link>
-            <li>
-              <a href="#">मंथन</a>
-            </li>
+              <a className="linkcolour" href="#">मंथन</a>
             <Link to={"/News"}>
-              <a href="#">खबरे</a>
+              <a className="linkcolour" href="#">खबरे</a>
             </Link>
-            <li>
-              <a href="#">साहित्य</a>
-            </li>
-            <li>
-              <a href="#">संपदकी</a>
-            </li>
-            <li>
-              <a href="#">पहाड़ रैबार</a>
-            </li>
+              <a className="linkcolour" href="#">साहित्य</a>
+              <a className="linkcolour" href="#">संपदकी</a>
             <Link to={"/Science&Tech"}>
-              <a href="#">विज्ञान और तकनीक</a>
+              <a className="linkcolour" href="#">विज्ञान और तकनीक</a>
             </Link>
-            <li>
-              <a href="#">वीडियो</a>
-            </li>
+              <a className="linkcolour" href="#">वीडियो</a>
             <Link to={"/Health"}>
-              <a href="#">स्वस्थ्य</a>
+              <a className="linkcolour" href="#">स्वस्थ्य</a>
             </Link>
-            <li>
-              <a href="#">शहरनामा</a>
-            </li>
-            <li>
-              <a href="#">हमारे बारे में</a>
-            </li>
+              <a className="linkcolour" href="#">शहरनामा</a>
+              <a className="linkcolour" href="#">हमारे बारे में</a>
             <Link to={"/Contact-us"}>
-              <a href="#">संपर्क</a>
+              <a className="linkcolour" href="#">संपर्क</a>
             </Link>
           </div>
         </ul>

@@ -8,30 +8,23 @@ function PageMain() {
     <>
     <Navbar />
 
-
-
-
-    <div className='col-ms-4 text-center'>
-
-    <img className='mainpg-img' src="/images/logo.jpeg" alt="" />
-     
-     <div className='Mainhead'>
-
-        <h2> Heading </h2>   
-
-
-     </div>
- 
-
-         <div className='Maintopic'>
-
-        <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt repellat blanditiis deserunt eos totam cupiditate quis nulla fugiat nostrum hic non asperiores, ipsa iusto illum recusandae expedita sapiente error. Voluptatem, suscipit temporibus, nesciunt odit quod necessitatibus commodi et saepe explicabo voluptatum expedita est, porro reprehenderit.</h3>
-
-         </div>
-
-
+<div className="container my-5">
+    <div className="d-flex flex-column justify-centent-center my-5">
+      <div className='mt-5 mb-2 pagemain-img border rounded'>
+        <img src="/images/logo.jpeg" alt="" />
+      </div>
+      <div>
+        <h2 className='my-3'>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </h2>
+      </div>
+      <div>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo tempora aliquam doloremque doloribus voluptate, illum, illo amet quasi architecto sapiente dignissimos. Perspiciatis reiciendis vitae, blanditiis eius earum adipisci hic quia. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti itaque fugit eius perferendis veritatis mollitia rem quae, delectus minima, ea sint laudantium nobis eveniet? Est adipisci cumque quisquam molestias amet. 
+        </p>
+      </div>
     </div>
-    
+    </div>
     
     
     <Footer/>
