@@ -1,19 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Navbar from '../components/AdminPage/Navbar'
+import Footer from '../components/AdminPage/Footer'
 import Sort from '../components/Sort'
 
-function Health() {
+function Test() {
     return (
 
         <>
 
             <Navbar />
+
             <div className=' container '>
                 <div class=' free col-md-7  '>
                     <h2> विज्ञान और </h2>
-                    <Sort />
+                     <Sort/>               
                 </div>
+                
                 <div class="card pt-1 my-4" >
                     <div class="row no-gutters">
                         <div class="col-sm-3">
@@ -29,13 +31,13 @@ function Health() {
                     </div>
                 </div>
 
-                <div class="card pt-5 w-80" >
+                <div class="card pt-5   my-4 w-80" >
                     <div class="row no-gutters">
                         <div class="col-sm-3">
                             <img class="card-img" src="/images/relimage.jpg" alt="Suresh Dasari Card" />
                         </div>
-                        <div class="col-sm-7">
-                            <div class="card-body">
+                        <div class="col-sm-9">
+                            <div class="card-body ">
                                 <h5 class="card-title">Suresh Dasari</h5>
                                 <p class="card-text">orem ipsum dolor sit amet consectetur adipisicing elit. Nostrum sequi earum quasi ratione obcaecati sit ad assumenda praesentium ea fugit repellat, ullam facilis numquam sed temporibus. Deserunt assumenda necessitatibus molestias adipisci maiores corporis omnis, minus dignissimos ipsam exercitationem eligendi? Cupiditate atque recusandae alias neque ab</p>
                                 <a href="#" class="btn btn-primary">Know More</a>
@@ -44,7 +46,7 @@ function Health() {
                     </div>
                 </div>
 
-                <div class="card pt-5" >
+                <div class="card pt-5  my-4" >
                     <div class="row no-gutters">
                         <div class="col-sm-3">
                             <img class="card-img" src="/images/image2.jpg" alt="Suresh Dasari Card" />
@@ -62,9 +64,10 @@ function Health() {
 
 
 
+            <Footer />
         </>
 
     )
 }
 
-export default Health
+export default Test

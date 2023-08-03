@@ -5,9 +5,7 @@ import axios from 'axios';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
-
-
-
+import Sort from '../components/Sort'
 
 function LatestNews() {
   const [newsData, setNewsData] = useState([]);
@@ -45,16 +43,20 @@ function LatestNews() {
 
       <Navbar />
 
-        <div className="container my-5">
+      <div className=' container '>
+                <div class=' free col-md-7  '>
+                    <h2> विज्ञान और </h2>
+                    <Sort />
+                </div>
           {newsData.map(newsItem => (
 
             <Link to={`/news-article/${newsItem.slug}`} key={newsItem._id}>
-              {/* <div className="card pt-4" key={newsItem._id}>
+              <div className="card pt-1 my-4" key={newsItem._id}>
               <div className="row no-gutters">
                 <div className="col-sm-3">
                   <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-9">
                   <div className="card-body">
                     <h5 className="card-title">{newsItem.title}</h5>
                     <p className="card-text">{newsItem.content}</p>
@@ -62,7 +64,7 @@ function LatestNews() {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
 
               <div class="card my-4" >
                 <div class="row no-gutters">
@@ -78,6 +80,22 @@ function LatestNews() {
                   </div>
                 </div>
               </div>
+
+              <div class="card my-4" >
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img class="card-img" src='images/image2.jpg' height="200px" width="100px" alt="Suresh Dasari Card" />
+                  </div>
+                  <div class="col-sm-7">
+                    <div class="card-body">
+                      <h6 class="card-title">sdg,sn</h6>
+                      <p class="card-text truncate m-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod consequuntur fugiat magnam quo labore omnis, maxime illum illo. Quae reiciendis facilis provident veritatis officia possimus accusantium reprehenderit distinctio aut, quasi architecto magni dicta velit est, ratione repudiandae assumenda. Culpa a eveniet aliquam voluptas eos quasi!</p>
+                      <a href="#" class="btn btn-primary mt-2">Know More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
 
             </Link>
 
@@ -99,6 +117,7 @@ function LatestNews() {
           </button>
 
         </div>
+        
 
       
 

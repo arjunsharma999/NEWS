@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
-
+import Sort from '../components/Sort'
 
 function NewsArticle({ match }) {
   const [newsData, setNewsData] = useState({});
@@ -36,13 +36,17 @@ function NewsArticle({ match }) {
     <>
 
       <Navbar />
-
-      {/* <div className="card pt-4" key={newsData._id}>
+      <div className=' container '>
+                <div class=' free col-md-7  '>
+                    <h2> विज्ञान और </h2>
+                    <Sort />
+                </div>
+      <div className="card pt-1 my-4" key={newsData._id}>
         <div className="row no-gutters">
           <div className="col-sm-3">
             <img className="card-img" src={newsData.imageUrl} alt={newsData.title} />
           </div>
-          <div className="col-sm-7">
+          <div className="col-sm-9">
             <div className="card-body">
               <h5 className="card-title">{newsData.title}</h5>
               <div dangerouslySetInnerHTML={renderFormattedContent(newsData.content)} />
@@ -50,9 +54,9 @@ function NewsArticle({ match }) {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
-      <div className="container my-5">
+    
         <div className="d-flex flex-column justify-centent-center my-5">
           <div className='mt-5 mb-2 pagemain-img border rounded'>
             <img src={newsData.imageUrl} alt="" />
@@ -70,6 +74,7 @@ function NewsArticle({ match }) {
           </div>
         </div>
       </div>
+      
 
       <Footer />
     </>

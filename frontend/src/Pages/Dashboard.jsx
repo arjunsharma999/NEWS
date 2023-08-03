@@ -50,24 +50,36 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        validateUser().then(isAuthenticated => {
-            if (!isAuthenticated) {
-                navigate('/admin/Log-in');
-            }
-        }).catch(error => {
-            console.log('Error checking authentication:', error);
-            navigate('/admin/Log-in');
-        });
+            // validateUser().then(isAuthenticated => {
+            //     if (!isAuthenticated) {
+            //         navigate('/admin/Log-in');
+            //     }
+            // }).catch(error => {
+            //     console.log('Error checking authentication:', error);
+            //     navigate('/admin/Log-in');
+            //   });
         getData();
-        if (slug) {
-            fetchDataForModification(slug);
-        }
-        console.log(action);
+    },[]);
 
-    }, [slug]);
-    console.log(slug);
+
+    // useEffect(() => {
+    //     validateUser().then(isAuthenticated => {
+    //         if (!isAuthenticated) {
+    //             navigate('/admin/Log-in');
+    //         }
+    //     }).catch(error => {
+    //         console.log('Error checking authentication:', error);
+    //         navigate('/admin/Log-in');
+    //     });
+    //     getData();
+    //     if (slug) {
+    //         fetchDataForModification(slug);
+    //     }
+    //     console.log(action);
+
+    // }, [slug]);
+    // console.log(slug);
     
-
     const fetchDataForModification = async (slug) => {
         setAction("Modify")
         try {
@@ -82,6 +94,7 @@ const Dashboard = () => {
             console.log("Error fetching data: ", error);
         }
     }
+
 
     // Function to handle image selection
     const handleImageSelect = (event) => {

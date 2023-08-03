@@ -2,22 +2,24 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/AdminPage/Navbar'
 import Footer from '../components/AdminPage/Footer'
+import Sort from '../components/Sort'
 
 function Sahitya() {
   return (
     <>
      <Navbar/>
 
-<div className="container">
-       <div class='col-sm-7 my-4 '>
-           <h2> ख़बरों की ख़बर </h2>
-        </div>            
-       <div class="card my-4" >
+     <div className=' container '>
+                <div class=' free col-md-7  '>
+                    <h2> विज्ञान और </h2>
+                    <Sort />
+                </div>            
+       <div class="card pt-1 my-4" >
            <div class="row no-gutters">
                <div class="col-sm-3">
                    <img class="card-img" height="200px" width="100px" src="/images/image2.jpg" alt="Suresh Dasari Card" />
                </div>
-               <div class="col-sm-7">
+               <div class="col-sm-9">
                    <div class="card-body">
                        <h6 class="card-title">TOPIC</h6>
                        <p class="card-text truncate m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum sequi earum quasi ratione obcaecati sit ad assumenda praesentium ea fugit repellat, ullam facilis numquam sed temporibus. Deserunt assumenda necessitatibus molestias adipisci maiores corporis omnis, minus dignissimos ipsam exercitationem eligendi? Cupiditate atque recusandae alias neque ab!</p>

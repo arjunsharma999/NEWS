@@ -1,12 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
+
 
 function Modify() {
     const [newsData, setNewsData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const { category } = useParams();
+
+    const Alert = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
+    
+   
+    }
 
 
     useEffect(() => {
@@ -24,6 +48,24 @@ function Modify() {
                 console.log('Error fetching news:', error);
             });
     }, [currentPage, category]);
+
+    // Swal.fire({
+    //     title: 'Are you sure?',
+    //     text: "You won't be able to revert this!",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Yes, delete it!'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'Your file has been deleted.',
+    //         'success'
+    //       )
+    //     }
+    //   })
 
     return (
         <>
@@ -49,6 +91,31 @@ function Modify() {
                             </div>
                         </div>
                 ))}
+            </div>
+
+
+
+            <div class="card pt-5 m-5" >
+
+                        <div class="row no-gutters">
+                            <div class="col-sm-3">
+                            
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body">
+                                    <h5 class="card-title"></h5>
+                                    <p class="card-text"></p>
+                            
+                                    <a href="#" class="btn btn-primary me-2">View</a>
+                                    
+                                    
+                                    <a href="#" class="btn btn-warning me-2">EDIT</a>
+                                
+                                    <a href="#" onClick={Alert} class="btn btn-danger ">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                
             </div>
 
 

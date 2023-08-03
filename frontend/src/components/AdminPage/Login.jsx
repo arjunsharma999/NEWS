@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { baseUrl } from '../../Constants';
-
+import Swal from 'sweetalert2';
 const LoginWrapper = () => {
+  
+ 
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Wrong password',
+     
+    })
+  
+
   const navigate = useNavigate();
 
   const handleLogin = (jwtToken) => {
@@ -16,6 +26,10 @@ const LoginWrapper = () => {
 export default LoginWrapper;
 
 class Login extends Component {
+ 
+  
+
+  
 
   constructor(props) {
     super(props)
@@ -61,35 +75,13 @@ class Login extends Component {
       console.log('Error during login:', error);
       // Handle other errors, e.g., network error
     }
-  }
+
+
+}
 
   render() {
     return (
       <>
-        <nav className="bg-secondary  navbar navbar-expand-lg  fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to={'/Sign-in'}>
-              Navbar
-            </Link>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={'/Sign-in'}>
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={'/Sign-up'}>
-                    Sign up
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-
-
 
         <form onSubmit={this.handleSubmit}>
 
@@ -115,7 +107,12 @@ class Login extends Component {
               />
             </div>
 
-            <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
+            {/* <div id="popup">
+              <span class="close" onclick="hidePopup()">&times;</span>
+              <p>Invalid username or password.</p>
+            </div> */}
+
+            {/* <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
@@ -126,16 +123,13 @@ class Login extends Component {
                   Remember me
                 </label>
               </div>
-            </div>
+            </div> */}
 
             <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-">
-              <button type="submit" className="btn btn-primary">
+              <button  onClick={Swal.fire} type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
-            <p className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-0">
-              Forgot <a href="#">password?</a>
-            </p>
           </div>
         </form>
 
