@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
+import Sort from '../components/Sort'
 
 
 
@@ -44,17 +45,20 @@ function LatestNews() {
 
       <Navbar />
 
-      <div className=' container m-5'>
-            <div class=' free col-md-7 m-5'>
+      <div className=' container '>
+                <div class=' free col-md-7  '>
+                    <h2> विज्ञान और </h2>
+                    <Sort />
+                </div>
           {newsData.map(newsItem => (
 
             <Link to={`/news-article/${newsItem.slug}`} key={newsItem._id}>
-              <div className="card pt-2 my-4" key={newsItem._id}>
+              <div className="card pt-1 my-4" key={newsItem._id}>
               <div className="row no-gutters">
                 <div className="col-sm-3">
                   <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
                 </div>
-                <div className="col-sm-7">
+                <div className="col-sm-9">
                   <div className="card-body">
                     <h5 className="card-title">{newsItem.title}</h5>
                     <p className="card-text">{newsItem.content}</p>
@@ -115,7 +119,7 @@ function LatestNews() {
           </button>
 
         </div>
-        </div>
+        
 
       
 

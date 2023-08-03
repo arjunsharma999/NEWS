@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
+import Sort from '../components/Sort'
 
 
 function News() {
@@ -27,17 +28,18 @@ function News() {
         <>
 
            <Navbar/>
-           <div className=' container m-5'>
-            <div class=' free col-md-7 m-5'>
-                <h2> खबरे </h2>
-            </div>
+           <div className=' container '>
+                <div class=' free col-md-7  '>
+                    <h2> विज्ञान और </h2>
+                    <Sort />
+                </div>
             <Link to={`/news/${newsData.slug}`} key={newsData._id}>
-                {/* <div class="card my-4 pt-2" >
+                {/* <div class="card my-4 pt-1" >
                     <div class="row no-gutters">
                         <div class="col-sm-3">
                             <img class="card-img" src={newsData.imageUrl}  alt={newsData.title} />
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-9">
                             <div class="card-body">
                                 <h5 class="card-title">{newsData.title}</h5>
                                 <p class="card-text">{newsData.content} </p>

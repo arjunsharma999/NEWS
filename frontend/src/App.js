@@ -25,6 +25,7 @@ import Pahad from './Pages/Pahad'
 import Sampadk from './Pages/Sampadk'
 import Sahitya from './Pages/Sahitya'
 import Test from './Pages/Test'
+import Sort from './components/Sort'
 
 
 
@@ -57,6 +58,7 @@ function App() {
               <Route path="/Video" element={<Video/>}/>
               <Route path="/Shernama" element={<shernama/>}/>
               <Route path="/dasfdsg" element={<Test/>}/>
+              <Route path="/gdd" element={<Sort/>}/>
             </Routes>
       
       
