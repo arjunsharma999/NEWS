@@ -4,10 +4,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
+import { baseUrl } from '../Constants';
 import Sort from '../components/Sort'
-
-
-
 
 function LatestNews() {
   const [newsData, setNewsData] = useState([]);
@@ -17,7 +15,7 @@ function LatestNews() {
 
   useEffect(() => {
     // Make the API call to fetch news data
-    axios.get(`http://localhost:8085/news/getNews?category=${category}&pageSize=5&page=${currentPage}`)
+    axios.get(`${baseUrl}/news/getNews?category=${category}&pageSize=5&page=${currentPage}`)
       .then(response => {
         setNewsData(response.data.paginatedNewsArticles); // Update the state with the fetched news data
         console.log(response.data.paginatedNewsArticles);

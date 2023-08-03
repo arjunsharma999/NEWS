@@ -3,15 +3,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
+const {baseUrl} = require("../Constants");
 import Sort from '../components/Sort'
-
 
 function News() {
     const [newsData, setNewsData] = useState([]);
 
     useEffect(() => {
         // Make the API call to fetch news data
-        axios.get('http://localhost:8085/news/get/football')
+        axios.get(`${baseUrl}/news/get/football`)
             .then(response => {
                 setNewsData(response.data); // Update the state with the fetched news data
                 console.log(response.data);
