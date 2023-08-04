@@ -1,4 +1,4 @@
-
+// This is the page for the list of news
 import { Link, useParams } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';

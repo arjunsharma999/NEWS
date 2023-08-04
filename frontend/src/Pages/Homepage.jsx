@@ -111,7 +111,7 @@ function Homepage() {
           </div>
 
           <div className="container">
-            <h2 className="my-4">Top News</h2>
+            <h2 className="my-4">Trending News</h2>
 
             <Swiper
               breakpoints={{
@@ -132,16 +132,17 @@ function Homepage() {
               className="mySwipr"
             >
               {trendingNewsData.map(newsItem => (
-                <SwiperSlide> <div className="card">
-                  <div class="card-body border rounded p-2">
-                    <h5 class="card-title my-2">{newsItem.title}</h5>
+                <SwiperSlide> <div className="cards">
+                  <div class="cards-body border rounded p-2">
+                    
                     <img
                       width="100%"
                       height="180px"
                       src={newsItem.imageUrl}
-                      className="card-img-top rounded"
+                      className="cards-img-top rounded"
                       alt="..."
                     ></img>
+                    <h5 class="cards-title my-2">{newsItem.title}</h5>
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>
@@ -179,16 +180,16 @@ function Homepage() {
               className="mySwipr"
             >
               {popularNewsData.map(newsItem => (
-                <SwiperSlide> <div className="card">
-                  <div class="card-body border rounded p-2">
-                    <h5 class="card-title my-2">{newsItem.title}</h5>
+                <SwiperSlide> <div className="cards">
+                  <div class="cards-body border rounded p-2">
                     <img
                       width="100%"
                       height="180px"
                       src={newsItem.imageUrl}
-                      className="card-img-top rounded"
+                      className="cards-img-top rounded"
                       alt="..."
                     ></img>
+                    <h5 class="cards-title my-2">{newsItem.title}</h5>
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>
@@ -323,7 +324,7 @@ function Homepage() {
               className="mySwiper my-5"
             >
               {ytData.map((ytItem) => (
-                <SwiperSlide key={ytItem.id}>
+                <SwiperSlide key={ytItem._id}>
                   <div className="card" >
                     <div className="video-container">
                       <iframe
