@@ -1,3 +1,4 @@
+// This page is for showing a particular news
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
