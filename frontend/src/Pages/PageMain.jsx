@@ -10,7 +10,7 @@ function PageMain() {
 
 <div className="container my-5">
     <div className="d-flex flex-column justify-centent-center my-5">
-      <div className='mt-5 mb-2 pagemain-img border rounded'>
+      <div className='mainn mt-5 mb-2 border rounded'>
         <img src="/images/logo.jpeg" alt="" />
       </div>
       <div>
