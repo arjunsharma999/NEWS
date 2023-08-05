@@ -117,9 +117,21 @@ function Modify() {
                         </div>
                 
             </div>
+            <div className="container my-5 d-flex gap-4 justify-content-center">
+          <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
+            disabled={currentPage === 1}
+            className='btn '
+          >
+            Previous
+          </button>
+          <button onClick={() => setCurrentPage((currentPage) => currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className='btn '
+          >
+            Next
+          </button>
 
-
-
+        </div>
         </>
     )
 }

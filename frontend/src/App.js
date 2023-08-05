@@ -17,6 +17,7 @@ import Footer from './components/AdminPage/Footer'
 import Video from './Pages/Video'
 import Test from './Pages/Test'
 import Sort from './components/Sort'
+import HeadlinesSelection from './Pages/HeadlinesSelection'
 
 
 
@@ -46,6 +47,7 @@ function App() {
               <Route path="/admin/Dashboard" element={<Dashboard/>}/>
               <Route path="/admin/edit/:slug" element={<Dashboard/>}/>
               <Route path="/Modify-post" element={<Modify/>}/>
+              <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection/>}/>
 
             </Routes>
       
