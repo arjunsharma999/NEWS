@@ -9,6 +9,7 @@ import axios from "axios";
 import { baseUrl, popularUrl, trendingUrl, ytUrl } from "../Constants";
 import Headlines from "./Headlines";
 
+
 function Homepage() {
   const [trendingNewsData, setTrendingNewsData] = useState([]);
   const [popularNewsData, setPopularNewsData] = useState([]);
@@ -40,6 +41,7 @@ function Homepage() {
     try{
       const response = await axios.get(`${baseUrl}/news/headlines`);
       setHeadlines(response.data);
+      console.log("headlines" , response.data);
 
     }
     catch(error){
@@ -52,8 +54,8 @@ function Homepage() {
       getTrendingNews();
       getPupularNews();
       getYtData();
-      setIsLoading(false);
       getHeadlines();
+      setIsLoading(false);
     }
     catch (error) {
       console.error('Error fetching data:', error);
@@ -171,7 +173,7 @@ function Homepage() {
             </Swiper>
           </div>
 
-          <Headlines newsItem = {headlines[0]}/>
+          <Headlines newsItem = {headlines[0]}/> 
           <Headlines newsItem = {headlines[1]}/>
           <Headlines newsItem = {headlines[2]}/>
           
@@ -442,7 +444,7 @@ function Homepage() {
             </div>
           </div>
 
-
+          
 
           <Footer />
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

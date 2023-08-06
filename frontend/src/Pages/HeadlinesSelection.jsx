@@ -6,6 +6,7 @@ import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
 import Sort from '../components/Sort'
+import CategoryFilter from '../components/Filter';
 
 function HeadlinesSelection() {
     const [newsData, setNewsData] = useState([]);
@@ -13,6 +14,25 @@ function HeadlinesSelection() {
     const [totalPages, setTotalPages] = useState(0);
     //const { category } = useParams();
     const [selectedNews, setSelectedNews] = useState([]);
+    const [sortOption, setSortOption] = useState('date');
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedNewsFetched, setSelectedNewsFetched] = useState(false);
+    const additionlaCategories = [
+        { value: "Headlines", label: "Headlines" }
+    ];
+
+    const getSelectedNews = async () => {
+        try {
+            if (!selectedNewsFetched) {
+                const response = axios.get(`${baseUrl}/news/headlines-slugs`);
+                setSelectedNews((await response).data);
+                setSelectedNewsFetched(true);
+            }
+        }
+        catch (error) {
+            console.error(error.response.data.message);
+        }
+    }
 
     const handleNewsSelection = (slug) => {
         if (selectedNews.includes(slug)) {
@@ -27,41 +47,84 @@ function HeadlinesSelection() {
         }
     };
 
-    const saveHeadlines = ()=>{
-        if(selectedNews.length<6){
+    const saveHeadlines = () => {
+        if (selectedNews.length < 6) {
             console.log("Select exactly 6 headlines to continue");
         }
         const slugs = {
-            slugs : selectedNews
+            slugs: selectedNews
         }
-        try{ 
-        const response = axios.post(`${baseUrl}/news/insertHeadlines`, slugs, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          console.log(response.data);
+        try {
+            const response = axios.post(`${baseUrl}/news/insertHeadlines`, slugs, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            console.log(response.data);
         }
-        catch(error){
-            console.log("Error ",error);
+        catch (error) {
+            console.log("Error ", error);
         }
-    }
+    };
+    const handleSort = (selectedOption) => {
+        setSortOption(selectedOption);
+
+        if (selectedOption) {
+            if (selectedOption.value === 'sort by date') {
+                // Sort by date
+                console.log("date");
+                setSortOption('date')
+                setCurrentPage(1);
+
+            } else if (selectedOption.value === 'sort by views') {
+                // Sort by views
+                console.log('views');
+                setSortOption('views');
+                setCurrentPage(1);
+            }
+        } else {
+            // Reset to original list
+            console.log('reset');
+        }
+    };
+    const handleFilter = (selectedOption) => {
+        setSelectedCategory(selectedOption.value);
+        console.log(selectedCategory);
+    };
+
+    const getHeadlines = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}/news/headlines`);
+            setNewsData(response.data);
+            console.log("headlines", response.data);
+        }
+        catch (error) {
+            console.error(error.response.data.message);
+        }
+    };
 
     useEffect(() => {
         // Make the API call to fetch news data
-        axios.get(`${baseUrl}/news/getNews?pageSize=5&page=${currentPage}`)
-            .then(response => {
-                setNewsData(response.data.paginatedNewsArticles); // Update the state with the fetched news data
-                console.log(response.data.paginatedNewsArticles);
-                setTotalPages(response.data.totalPages);
-                console.log(totalPages);
-                console.log(response.data);
-                console.log(response.data.page);
-            })
-            .catch(error => {
-                console.log('Error fetching news:', error);
-            });
-    }, [currentPage]);
+        getSelectedNews();
+        if (selectedCategory === "Headlines") {
+            getHeadlines();
+            setTotalPages(1);
+        }
+        else {
+            axios.get(`${baseUrl}/news/getNews?category=${selectedCategory}&sortBy=${sortOption}&pageSize=5&page=${currentPage}`)
+                .then(response => {
+                    setNewsData(response.data.paginatedNewsArticles); // Update the state with the fetched news data
+                    console.log(response.data.paginatedNewsArticles);
+                    setTotalPages(response.data.totalPages);
+                    console.log(totalPages);
+                    console.log(response.data);
+                    console.log(response.data.page);
+                })
+                .catch(error => {
+                    console.log('Error fetching news:', error);
+                });
+        }
+    }, [currentPage, sortOption, selectedCategory]);
     return (
 
         <>
@@ -75,12 +138,15 @@ function HeadlinesSelection() {
     ))}
   </div> */}
 
-            <Navbar />
+            {/* <Navbar /> */}
+
+
 
             <div className=' container '>
                 <div class=' free col-md-7  '>
-                    <h2> विज्ञान और </h2>
-                    <Sort />
+                    <Sort onChange={handleSort} />
+                    <CategoryFilter onChange={handleFilter} additionlaCategories={additionlaCategories} />
+
                 </div>
                 {newsData.map(newsItem => (
                     <div key={newsItem._id}>

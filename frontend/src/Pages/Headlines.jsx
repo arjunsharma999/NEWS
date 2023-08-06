@@ -1,9 +1,11 @@
 
 
-function Headlines({newsItem}) {
+function Headlines({ newsItem }) {
+    if (!newsItem)
+        return null;
     return (
         <>
-            <div class=" ccar card my-4" >
+            <div class=" ccar card my-4" key={newsItem._id} >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" height="200px" width="50%" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
