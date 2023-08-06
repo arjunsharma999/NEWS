@@ -17,7 +17,7 @@ function Navbar() {
           </a></Link>
           <ul className="nav-links">
             <i className="uil uil-times navCloseBtn"></i>
-            <Link to={"/News/Sports"}>
+            <Link to={"/News/ख़बरों की ख़बर"}>
               <a href="#">ख़बरों की ख़बर</a>
             </Link>
 
