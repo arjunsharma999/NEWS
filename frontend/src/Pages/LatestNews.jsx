@@ -13,6 +13,7 @@ function LatestNews() {
   const [totalPages, setTotalPages] = useState(0);
   const { category } = useParams();
   const [sortOption, setSortOption] = useState('date');
+  const [loading, setLoading] = useState(false);
 
   const handleSort = (selectedOption) => {
     setSortOption(selectedOption);
@@ -37,6 +38,10 @@ function LatestNews() {
   };
 
   useEffect(() => {
+    if(loading){
+      return;
+    }
+    setLoading(true);
     // Make the API call to fetch news data
     axios.get(`${baseUrl}/news/getNews?category=${category}&sortBy=${sortOption}&pageSize=5&page=${currentPage}`)
       .then(response => {
@@ -49,51 +54,56 @@ function LatestNews() {
       })
       .catch(error => {
         console.log('Error fetching news:', error);
+      }).finally(() => {
+        setLoading(false);
       });
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth', // Optional: Use smooth scrolling animation
-      });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Optional: Use smooth scrolling animation
+    });
+    console.log("END");
   }, [currentPage, category, sortOption]);
   return (
 
     <>
 
       {/* <div>
-    {newsData.map(item => (
-      <div key={item.id}>
-        <h3>{item.title}</h3>
-        <p>{item.description}</p>
-      </div>
-    ))}
-  </div> */}
+                {newsData.map(item => (
+                  <div key={item.id}>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                ))}
+              </div> */}
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <Navbar />
 
-      <Navbar />
+          <div className=' container '>
+            <div class=' free col-md-7  '>
+              <Sort onChange={handleSort} />
+            </div>
+            {newsData.map(newsItem => (
 
-      <div className=' container '>
-        <div class=' free col-md-7  '>
-          <h2> विज्ञान और </h2>
-          <Sort onChange={handleSort} />
-        </div>
-        {newsData.map(newsItem => (
-
-          <Link to={`/news-article/${newsItem.slug}`} key={newsItem._id}>
-            <div className="card pt-1 my-4" key={newsItem._id}>
-              <div className="row no-gutters">
-                <div className="col-sm-3">
-                  <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
-                </div>
-                <div className="col-sm-9">
-                  <div className="card-body">
-                    <h5 className="card-title">{newsItem.title}</h5>
-                    <p className="card-text">{newsItem.content}</p>
-                    <a href="#" className="btn btn-primary">Know More</a>
+              <Link to={`/news-article/${newsItem.slug}`} key={newsItem._id}>
+                <div className="card pt-1 my-4" key={newsItem._id}>
+                  <div className="row no-gutters">
+                    <div className="col-sm-3">
+                      <img className="card-img" src={newsItem.imageUrl} alt={newsItem.title} />
+                    </div>
+                    <div className="col-sm-9">
+                      <div className="card-body">
+                        <h5 className="card-title">{newsItem.title}</h5>
+                        <p className="card-text">{newsItem.content}</p>
+                        <button className="btn btn-primary">Know More</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div class="card my-4" >
+                {/* <div class="card my-4" >
               <div class="row no-gutters">
                 <div class="col-sm-3">
                   <img class="card-img" height="200px" width="100px" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
@@ -121,32 +131,32 @@ function LatestNews() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
 
-          </Link>
+              </Link>
 
-        ))}
-      </div>
+            ))}
+          </div>
 
-      <div className="container my-5 d-flex gap-4 justify-content-center">
-        <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
-          disabled={currentPage === 1}
-          className='btn '
-        >
-          Previous
-        </button>
-        <button onClick={() => setCurrentPage((currentPage) => currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className='btn '
-        >
-          Next
-        </button>
+          <div className="container my-5 d-flex gap-4 justify-content-center">
+            <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
+              disabled={currentPage === 1}
+              className='btn '
+            >
+              Previous
+            </button>
+            <button onClick={() => setCurrentPage((currentPage) => currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className='btn '
+            >
+              Next
+            </button>
 
-      </div>
+          </div>
 
-
-
+        </div>
+      )}
 
       <Footer />
 
