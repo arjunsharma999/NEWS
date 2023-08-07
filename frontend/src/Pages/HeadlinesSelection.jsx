@@ -2,7 +2,7 @@
 import { Link, useParams } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '../components/AdminPage/Navbar';
+//import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
 import Sort from '../components/Sort'
@@ -47,7 +47,7 @@ function HeadlinesSelection() {
         }
     };
 
-    const saveHeadlines = () => {
+    const saveHeadlines = async() => {
         if (selectedNews.length < 6) {
             console.log("Select exactly 6 headlines to continue");
         }
@@ -60,7 +60,7 @@ function HeadlinesSelection() {
                     "Content-Type": "application/json",
                 },
             })
-            console.log(response.data);
+            console.log((await response).data);
         }
         catch (error) {
             console.log("Error ", error);
@@ -197,7 +197,6 @@ function HeadlinesSelection() {
             </div>
             <div className='container my-5 d-flex gap-4 justify-content-center'>
                 <button onClick={() => saveHeadlines()}
-                    disabled={currentPage === 1}
                     className='btn '
                 >
                     Save Headlines
