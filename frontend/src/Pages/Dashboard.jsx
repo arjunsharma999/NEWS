@@ -90,6 +90,7 @@ const Dashboard = () => {
             setTitle(response.data.title);
             setContent(response.data.content);
             setCategory(response.data.category);
+            setVideoId(response.data.ytVideoId);
         }
         catch (error) {
             console.log("Error fetching data: ", error);
