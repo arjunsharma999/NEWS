@@ -49,6 +49,12 @@ function Navbar() {
               <Link to={"/News/स्वस्थ्य"}>
               <a href="#">स्वस्थ्य</a>
             </Link>
+            <Link to={"/News/स्वस्थ्य"}>
+              <a href="#"></a>
+            </Link>
+            <Link to={"/News/स्वस्थ्य"}>
+              <a href="#"></a>
+            </Link>
             <Link to={"/News/शहरनामा"}>
               <a href="#">शहरनामा</a>
             </Link>
