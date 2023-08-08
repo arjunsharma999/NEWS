@@ -74,6 +74,13 @@ function NewsArticle({ match }) {
               {newsData.content}
             </p>
           </div>
+          <div>
+            {newsData.authorDetails&&(
+              <h2 className='my-3'>
+              {newsData.authorDetails}
+            </h2>
+            )}
+          </div>
         </div>
         <div className="list-group-item my-3">
          {/* Check if ytVideoId is present */}

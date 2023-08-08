@@ -51,11 +51,19 @@ function Homepage() {
   }
   useState(() => {
     try {
-      getTrendingNews();
-      getPupularNews();
-      getYtData();
-      getHeadlines();
-      setIsLoading(false);
+      Promise.all([  
+      getTrendingNews(),
+      getPupularNews(),
+      getYtData(),
+      getHeadlines()])
+      .then(()=>{
+        setIsLoading(false);
+        console.log('All data fetched successfully');
+      })
+      .catch(()=>{
+        setIsLoading(false);
+      })
+      
     }
     catch (error) {
       console.error('Error fetching data:', error);
