@@ -19,7 +19,7 @@ body {
   left: 0;
   align-items: center;
   width: 100%;
-  padding: 20px 100px;
+  padding: 15px 50px;
   background-color: black;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +27,7 @@ body {
 .logo img {
   align-items: center;
   border-radius: 50%;
-  width: 4.5rem;
+  width: 3.5rem;
   
 
 

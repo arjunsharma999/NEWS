@@ -50,10 +50,10 @@ function Navbar() {
               <a href="#">स्वस्थ्य</a>
             </Link>
             <Link to={"/News/स्वस्थ्य"}>
-              <a href="#"></a>
+              <a href="#">आरम्भिक अंक</a>
             </Link>
             <Link to={"/News/स्वस्थ्य"}>
-              <a href="#"></a>
+              <a href="#">क्लासिफाइड गढ़वाल</a>
             </Link>
             <Link to={"/News/शहरनामा"}>
               <a href="#">शहरनामा</a>
