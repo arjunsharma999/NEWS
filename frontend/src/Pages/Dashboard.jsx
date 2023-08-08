@@ -16,6 +16,7 @@ const Dashboard = () => {
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('ख़बरों की ख़बर');
     const [selectedImage, setSelectedImage] = useState(null); // State to hold the selected image
+    const [videoId, setVideoId] = useState('');
     const imageInputRef = useRef(null); // Ref to access the file input element
     const [dataForModify, setdataForModify] = useState(null);
     const [action, setAction] = useState('Create');
@@ -89,6 +90,7 @@ const Dashboard = () => {
             setTitle(response.data.title);
             setContent(response.data.content);
             setCategory(response.data.category);
+            setVideoId(response.data.ytVideoId);
         }
         catch (error) {
             console.log("Error fetching data: ", error);
@@ -112,6 +114,7 @@ const Dashboard = () => {
         formData.append('content', content);
         formData.append('category', category);
         formData.append('image', selectedImage); // Append the selected image to the form data
+        formData.append('ytVideoId', videoId);
 
         console.log(title);
         console.log(category);
@@ -236,6 +239,12 @@ const Dashboard = () => {
                                     शहरनामा
                                 </option>
                             </Input>
+                        </div>
+                        <div className='my-3 m-5'>
+
+                            <Label For="title">Youtube Video Id</Label>
+                            <Input type="text" placeholder='Title' name="" id="title" value={videoId} onChange={(e) => setVideoId(e.target.value)} />
+
                         </div>
                         <Container className='text-center'>
                             <Link to="/Home">

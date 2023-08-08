@@ -7,12 +7,15 @@ import { Autoplay, FreeMode, Pagination } from 'swiper/modules';
 import Footer from "../components/AdminPage/Footer";
 import axios from "axios";
 import { baseUrl, popularUrl, trendingUrl, ytUrl } from "../Constants";
+import Headlines from "./Headlines";
+
 
 function Homepage() {
   const [trendingNewsData, setTrendingNewsData] = useState([]);
   const [popularNewsData, setPopularNewsData] = useState([]);
   const [ytData, setYtData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [headlines, setHeadlines] = useState([]);
 
   const getTrendingNews = async () => {
     const response = await axios.get(`${baseUrl}${trendingUrl}`);
@@ -34,12 +37,24 @@ function Homepage() {
     window.open(url, '_blank');
   };
 
+  const getHeadlines =async () =>{
+    try{
+      const response = await axios.get(`${baseUrl}/news/headlines`);
+      setHeadlines(response.data);
+      console.log("headlines" , response.data);
 
+    }
+    catch(error){
+      console.error(error.response.data.message);
+    }
+
+  }
   useState(() => {
     try {
       getTrendingNews();
       getPupularNews();
       getYtData();
+      getHeadlines();
       setIsLoading(false);
     }
     catch (error) {
@@ -72,6 +87,7 @@ function Homepage() {
               pagination={{
                 clickable: true,
               }}
+              effect="fade"
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -158,6 +174,10 @@ function Homepage() {
             </Swiper>
           </div>
 
+          <Headlines newsItem = {headlines[0]}/> 
+          <Headlines newsItem = {headlines[1]}/>
+          <Headlines newsItem = {headlines[2]}/>
+          
           <div className="container">
             <h2 className="my-4">Top News</h2>
 
@@ -204,6 +224,11 @@ function Homepage() {
               ))}
             </Swiper>
           </div>
+
+          <Headlines newsItem = {headlines[3]}/>
+          <Headlines newsItem = {headlines[4]}/>
+          <Headlines newsItem = {headlines[5]}/>
+
           <div className="container my-3">
             <h2>Featured News </h2>
             <div className="row my-4">
@@ -420,7 +445,7 @@ function Homepage() {
             </div>
           </div>
 
-
+          
 
           <Footer />
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
