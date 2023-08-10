@@ -18,11 +18,10 @@ import Video from './Pages/Video'
 import Test from './Pages/Test'
 import Sort from './components/Sort'
 import HeadlinesSelection from './Pages/HeadlinesSelection'
+import CarouselSelection from './Pages/CarouselSelection'
 import PageMain from './Pages/PageMain'
 import { useState, useEffect } from 'react'
 import GridLoader from "react-spinners/GridLoader";
-
-
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -65,15 +64,14 @@ function App() {
 
               <Route path="/admin/Log-in" element={<LoginWrapper />} />
               <Route path="/admin/Sign-up" element={<Signup />} />
-              <Route path="/admin/Dashboard" element={<Dashboard />} />
-              <Route path="/admin/edit/:slug" element={<Dashboard />} />
-              <Route path="/Modify-post" element={<Modify />} />
-              <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection />} />
 
+              <Route path="/admin/Dashboard" element={<Dashboard/>}/>
+              <Route path="/admin/edit/:slug" element={<Dashboard/>}/>
+              <Route path="/Modify-post" element={<Modify/>}/>
+              <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection/>}/>
+              <Route path="/admin/Carousel-Selection" element={<CarouselSelection/>}/> 
+                
             </Routes>
-
-
-
           </Router>
           }
           </div>

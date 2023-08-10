@@ -710,6 +710,42 @@ footer{
   
 }
 
+.swiper-image {
+  width: 100%; /* Let the width adjust automatically */
+  max-height: 650px; /* Set the maximum height */
+  object-fit: contain; /* Maintain aspect ratio while fitting within the max height */
+}
+
+.pillarboxed-image {
+  /* background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center;  */
+  width: 100%; /* Full width of the container */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 650px; 
+  object-fit: cover;
+  /* Pillarboxing */
+  position: relative;
+}
+
+/* Add vertical bars for pillarboxing effect */
+.pillarboxed-image::before,
+.pillarboxed-image::after {
+  content: ''; /* Create pseudo-elements for vertical bars */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0%; /* Adjust the width of the vertical bars as needed */
+  background-color: black; /* Color of the bars */
+}
+
+.pillarboxed-image::before {
+  left: 0; /* Left bar */
+}
+
+.pillarboxed-image::after {
+  right: 0; /* Right bar */
+}
 
 .swiper {
   width: 100%;

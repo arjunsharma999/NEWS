@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
-import Swal from 'sweetalert2'
 import { baseUrl } from '../Constants';
 import Sort from '../components/Sort'
 import CategoryFilter from '../components/Filter';
+import { showConfirmationAlert } from './ConfirmationDialogBox';
+import { showAlert } from './DialogBox';
 
 
 function Modify() {
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [selectedCategory ,setSelectedCategory] = useState(''); 
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [sortOption, setSortOption] = useState('date');
   const additionlaCategories = [];
 
-  const Alert = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+  const handleDelete = async (slug) => {
+    const result = showConfirmationAlert('warning', 'Confirmation Required', 'Are you sure to Delete this news Article');
+    if ((await result).isConfirmed) {
+      try {
+        const response = await axios.delete(`${baseUrl}/news/delete/${slug}`, {
+          withCredentials: true
+        });
+        showAlert('success', 'Deleted', 'The news article deleted successfully');
+      } catch (error) {
+        if (error.response.status === 401) {
+          showAlert('error', 'Error', 'Not Authorized to this action');
+        }
+        else {
+          showAlert('error', 'Error', 'Failed to delete the article');
+        }
       }
-    })
-  }
+    }
+  };
 
   const handleSort = (selectedOption) => {
     setSortOption(selectedOption);
@@ -57,9 +57,9 @@ function Modify() {
     }
   };
 
-  const handleFilter = (selectedOption)=>{
-      setSelectedCategory(selectedOption.value);
-      console.log(selectedCategory);
+  const handleFilter = (selectedOption) => {
+    setSelectedCategory(selectedOption.value);
+    console.log(selectedCategory);
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function Modify() {
       .catch(error => {
         console.log('Error fetching news:', error);
       });
-  }, [currentPage, selectedCategory,sortOption]);
+  }, [currentPage, selectedCategory, sortOption]);
 
   // Swal.fire({
   //     title: 'Are you sure?',
@@ -122,7 +122,7 @@ function Modify() {
                 <Link to={`/admin/edit/${newsItem.slug}`} >
                   <a href="#" class="btn btn-warning me-2">EDIT</a>
                 </Link>
-                <a href="#" class="btn btn-danger ">Delete</a>
+                <a href="#" class="btn btn-danger " onClick={() => handleDelete(newsItem.slug)}>Delete</a>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ function Modify() {
 
 
 
-      <div class="card pt-5 m-5" >
+      {/* <div class="card pt-5 m-5" >
 
         <div class="row no-gutters">
           <div class="col-sm-3">
@@ -152,7 +152,7 @@ function Modify() {
           </div>
         </div>
 
-      </div>
+      </div> */}
       <div className="container my-5 d-flex gap-4 justify-content-center">
         <button onClick={() => setCurrentPage((currentPage) => currentPage - 1)}
           disabled={currentPage === 1}
