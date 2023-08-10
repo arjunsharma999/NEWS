@@ -5,12 +5,12 @@ function Headlines({ newsItem }) {
         return null;
     return (
         <>
-            <div class=" ccar card my-4" key={newsItem._id} >
+            <div class=" ccar card my-4 " key={newsItem._id} >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" height="200px" width="50%" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <div class="card-body">
                             <h6 class="card-title">{newsItem.title}</h6>
                             <p class="card-text truncate m-0">{newsItem.content}</p>
