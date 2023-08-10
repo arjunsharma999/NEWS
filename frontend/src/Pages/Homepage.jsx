@@ -8,6 +8,8 @@ import Footer from "../components/AdminPage/Footer";
 import axios from "axios";
 import { baseUrl, popularUrl, trendingUrl, ytUrl } from "../Constants";
 import Headlines from "./Headlines";
+import { Link } from "react-router-dom";
+import { showAlert } from "./DialogBox";
 
 
 function Homepage() {
@@ -16,6 +18,7 @@ function Homepage() {
   const [ytData, setYtData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [headlines, setHeadlines] = useState([]);
+  const [carousel, setCarousel] = useState([]);
 
   const getTrendingNews = async () => {
     const response = await axios.get(`${baseUrl}${trendingUrl}`);
@@ -37,40 +40,51 @@ function Homepage() {
     window.open(url, '_blank');
   };
 
-  const getHeadlines =async () =>{
-    try{
+  const getHeadlines = async () => {
+    try {
       const response = await axios.get(`${baseUrl}/news/headlines`);
       setHeadlines(response.data);
-      console.log("headlines" , response.data);
-
+      console.log("headlines", response.data);
     }
-    catch(error){
+    catch (error) {
       console.error(error.response.data.message);
     }
-
   }
+
+  const getCarousel = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/news/carousel`);
+      setCarousel(response.data);
+      console.log("carousel", response.data);
+    }
+    catch (error) {
+      console.error(error.response.data.message);
+    }
+  }
+
   useState(() => {
     try {
-      Promise.all([  
-      getTrendingNews(),
-      getPupularNews(),
-      getYtData(),
-      getHeadlines()])
-      .then(()=>{
-        setIsLoading(false);
-        console.log('All data fetched successfully');
-      })
-      .catch(()=>{
-        setIsLoading(false);
-      })
-      
+      Promise.all([
+        getTrendingNews(),
+        getPupularNews(),
+        getYtData(),
+        getHeadlines(),
+        getCarousel()
+      ])
+        .then(() => {
+          setIsLoading(false);
+          console.log('All data fetched successfully');
+        })
+        .catch(() => {
+          showAlert('error', 'Error!', 'Error while fetching the news data');
+          setIsLoading(false);
+        })
+
     }
     catch (error) {
       console.error('Error fetching data:', error);
       setIsLoading(false);
     }
-    setIsLoading(false);
-
   }, []);
 
   const renderFormattedContent = (htmlContent) => {
@@ -102,20 +116,33 @@ function Homepage() {
               }}
               modules={[Autoplay, Pagination]}
               className="mySwiper my-5"
+              style={{ maxWidth: '100%', maxHeight: '650px' }}
             >
               <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img1.jpg" alt="" />
+                <img 
+                className="pillarboxed-image"
+                 src={carousel[0].imageUrl} 
+                alt="" />
+                {/* <div className="pillarboxed-image" style={{ backgroundImage: `url(${carousel[0].imageUrl})` }}>
+                  <h5>carousel[0].title</h5>
+                </div> */}
+
               </SwiperSlide>
               <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img2.jpg" alt="" />
+                <img className="pillarboxed-image" src={carousel[1].imageUrl} alt="" />
               </SwiperSlide>
               <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img3.jpg" alt="" />
+              <img className="pillarboxed-image" src={carousel[2].imageUrl} alt="" />
+                {/* <div className="pillarboxed-image"
+                  style={{
+                    backgroundImage: `url(${carousel[2].imageUrl})`,
+                    // width: '100%',
+                    // height: "auto",
+                    // backgroundSize: 'cover',
+                  }}></div> */}
+
               </SwiperSlide>
-              <SwiperSlide>
+              {/* <SwiperSlide>
                 <img width="100%"
                   height="50%" src="/images/image2.jpg" alt="" />
               </SwiperSlide>
@@ -130,7 +157,7 @@ function Homepage() {
               <SwiperSlide>
                 <img width="100%"
                   height="50%" src="/images/image2.jpg" alt="" />
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
           </div>
 
@@ -158,7 +185,7 @@ function Homepage() {
               {trendingNewsData.map(newsItem => (
                 <SwiperSlide> <div className="cards">
                   <div class="cards-body border rounded p-2">
-                    
+
                     <img
                       width="100%"
                       height="180px"
@@ -170,22 +197,24 @@ function Homepage() {
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
+                    <Link to={`/news-article/${newsItem.slug}`}>
+                      <a href="" class="btn btn-outline-success btn-sm ">
+                        Read More
+                      </a>
+                    </Link>
+                    {/* <a href="" class="btn btn-outline-danger btn-sm mx-2">
                       Like
-                    </a>
+                    </a> */}
                   </div>
                 </div></SwiperSlide>
               ))}
             </Swiper>
           </div>
 
-          <Headlines newsItem = {headlines[0]}/> 
-          <Headlines newsItem = {headlines[1]}/>
-          <Headlines newsItem = {headlines[2]}/>
-          
+          <Headlines newsItem={headlines[0]} />
+          <Headlines newsItem={headlines[1]} />
+          <Headlines newsItem={headlines[2]} />
+
           <div className="container">
             <h2 className="my-4">Top News</h2>
 
@@ -221,21 +250,23 @@ function Homepage() {
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
+                    <Link to={`/news-article/${newsItem.slug}`}>
+                      <a href="" class="btn btn-outline-success btn-sm ">
+                        Read More
+                      </a>
+                    </Link>
+                    {/* <a href="" class="btn btn-outline-danger btn-sm mx-2">
                       Like
-                    </a>
+                    </a> */}
                   </div>
                 </div></SwiperSlide>
               ))}
             </Swiper>
           </div>
 
-          <Headlines newsItem = {headlines[3]}/>
-          <Headlines newsItem = {headlines[4]}/>
-          <Headlines newsItem = {headlines[5]}/>
+          <Headlines newsItem={headlines[3]} />
+          <Headlines newsItem={headlines[4]} />
+          <Headlines newsItem={headlines[5]} />
 
           <div className="container my-3">
             <h2>Featured News </h2>
@@ -453,7 +484,7 @@ function Homepage() {
             </div>
           </div>
 
-          
+
 
           <Footer />
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

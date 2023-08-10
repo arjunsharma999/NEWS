@@ -5,29 +5,50 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
+import { showAlert } from './DialogBox';
+import Cards from './Cards';
 
 function NewsArticle({ match }) {
   const [newsData, setNewsData] = useState({});
+  const [ralatedNewsData , setRelatedNewsData] = useState([]);
 
   const { slug } = useParams();
 
-  const getData = async ()=>{
-    axios.get(`${baseUrl}/news/get/${slug}`)
+  const getData = async () => {
+    await axios.get(`${baseUrl}/news/get/${slug}`)
       .then(response => {
         setNewsData(response.data);
         console.log(response.data);
       })
       .catch(error => {
         console.log('Error fetching news:', error);
+        showAlert('error', 'Error!!', 'Error while fetching the news Data');
       });
+  }
+
+  const getRelatedNews = async () =>{
+    try{
+      const response = await axios.get(`${baseUrl}/news/related-news/${slug}`)
+      setRelatedNewsData(response.data);
+      console.log("realated data fetched");
+    }
+    catch(error){
+      console.log('Error fetching news:', error);
+      showAlert('error', 'Error!!', 'Error while fetching the related news Data');
+    }
+    
   }
 
   useEffect(() => {
     // Fetch the news data by its slug from the backend API
-
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Optional: Use smooth scrolling animation
+    });
     console.log(slug);
     getData();
-    
+    getRelatedNews();
+
   }, [slug]);
 
   const renderFormattedContent = (htmlContent) => {
@@ -42,7 +63,7 @@ function NewsArticle({ match }) {
 
       <Navbar />
       <div className=' container '>
-        
+
         {/* <div className="card pt-1 my-4" key={newsData._id}>
           <div className="row no-gutters">
             <div className="col-sm-3">
@@ -75,33 +96,33 @@ function NewsArticle({ match }) {
             </p>
           </div>
           <div>
-            {newsData.authorDetails&&(
+            {newsData.authorDetails && (
               <h2 className='my-3'>
-              {newsData.authorDetails}
-            </h2>
+                {newsData.authorDetails}
+              </h2>
             )}
           </div>
         </div>
         <div className="list-group-item my-3">
-         {/* Check if ytVideoId is present */}
-         {newsData.ytVideoId && (
-          <iframe
-            src={`https://www.youtube.com/embed/${newsData.ytVideoId}`}
-            width="100%"
-            height="600px"
-            title=" "
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        )}
-        {/* Add other content related to ytItem here */}
-        {/* <h5 className="card-title my-2 card-title-fixed-length">{ytItem.title}</h5>
+          {/* Check if ytVideoId is present */}
+          {newsData.ytVideoId && (
+            <iframe
+              src={`https://www.youtube.com/embed/${newsData.ytVideoId}`}
+              width="100%"
+              height="600px"
+              title=" "
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          )}
+          {/* Add other content related to ytItem here */}
+          {/* <h5 className="card-title my-2 card-title-fixed-length">{ytItem.title}</h5>
         <p className="card-text">{ytItem.description}</p> */}
-        {/* Add any other content you want to display */}
-      </div>
+          {/* Add any other content you want to display */}
+        </div>
       </div>
 
-
+      <Cards newsData={ralatedNewsData}/>
       <Footer />
     </>
   );

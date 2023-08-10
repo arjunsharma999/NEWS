@@ -18,6 +18,7 @@ import Video from './Pages/Video'
 import Test from './Pages/Test'
 import Sort from './components/Sort'
 import HeadlinesSelection from './Pages/HeadlinesSelection'
+import CarouselSelection from './Pages/CarouselSelection'
 
 
 
@@ -48,6 +49,7 @@ function App() {
               <Route path="/admin/edit/:slug" element={<Dashboard/>}/>
               <Route path="/Modify-post" element={<Modify/>}/>
               <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection/>}/>
+              <Route path="/admin/Carousel-Selection" element={<CarouselSelection/>}/> 
 
             </Routes>
       

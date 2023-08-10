@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom";
 function Headlines({ newsItem }) {
     if (!newsItem)
         return null;
@@ -14,7 +14,9 @@ function Headlines({ newsItem }) {
                         <div class="card-body">
                             <h6 class="card-title">{newsItem.title}</h6>
                             <p class="card-text truncate m-0">{newsItem.content}</p>
-                            <a href="#" class="btn btn-primary mt-2">Know More</a>
+                            <Link to={`/news-article/${newsItem.slug}`}>
+                                <a href="#" class="btn btn-primary mt-2">Know More</a>
+                            </Link>
                         </div>
                     </div>
                 </div>
