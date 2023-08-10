@@ -106,16 +106,16 @@ function Modify() {
         <CategoryFilter onChange={handleFilter} additionlaCategories={additionlaCategories} />
       </div>
 
-      <div class="card pt-5 m-5" >
+      <div class="card pt-1 m-5" >
         {newsData.map(newsItem => (
           <div class="row no-gutters">
             <div class="col-sm-3">
               <img class="card-img" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
               <div class="card-body">
                 <h5 class="card-title">{newsItem.title}</h5>
-                <p class="card-text">{newsItem.content}</p>
+                <p class="card-text truncate m-0">{newsItem.content}</p>
                 <Link to={`/news-article/${newsItem.slug}`} >
                   <a href="#" class="btn btn-primary me-2">View</a>
                 </Link>

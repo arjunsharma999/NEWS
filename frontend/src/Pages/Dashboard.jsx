@@ -298,7 +298,13 @@ const Dashboard = () => {
                                 </Button>
                             </Link>
                             <Link to="/Modify-post">
-                                <Button color='danger'> Modify</Button>
+                                <Button color='danger me-2'> Modify</Button>
+                            </Link>
+                            <Link to="/Modify-post">
+                                <Button color='info me-2'> Goto Headline </Button>
+                            </Link>
+                            <Link to="/Modify-post">
+                                <Button color='dark '> Goto Slider </Button>
                             </Link>
 
                         </Container>

@@ -104,6 +104,7 @@ class Login extends Component {
 
             <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-">
               <button type="submit" className="btn btn-primary">
+
                 Submit
               </button>
             </div>

@@ -98,7 +98,7 @@ function LatestNews() {
                     <div className="col-sm-9">
                       <div className="card-body">
                         <h5 className="card-title">{newsItem.title}</h5>
-                        <p className="card-text">{newsItem.content}</p>
+                        <p className="card-text truncate m-0">{newsItem.content}</p>
                         <Link to={`/news-article/${newsItem.slug}`}>
                         <button className="btn btn-primary">Know More</button>
                         </Link>

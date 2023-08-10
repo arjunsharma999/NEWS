@@ -103,7 +103,7 @@ function Homepage() {
       ) : (
         <>
           <Navbar />
-          <div className="container-fluid my-5 pt-sm-2">
+          <div className="">
             <Swiper
               spaceBetween={10}
               pagination={{
@@ -126,7 +126,6 @@ function Homepage() {
                 {/* <div className="pillarboxed-image" style={{ backgroundImage: `url(${carousel[0].imageUrl})` }}>
                   <h5>carousel[0].title</h5>
                 </div> */}
-
               </SwiperSlide>
               <SwiperSlide>
                 <img className="pillarboxed-image" src={carousel[1].imageUrl} alt="" />
@@ -140,7 +139,6 @@ function Homepage() {
                     // height: "auto",
                     // backgroundSize: 'cover',
                   }}></div> */}
-
               </SwiperSlide>
               {/* <SwiperSlide>
                 <img width="100%"
@@ -158,6 +156,7 @@ function Homepage() {
                 <img width="100%"
                   height="50%" src="/images/image2.jpg" alt="" />
               </SwiperSlide> */}
+
             </Swiper>
           </div>
 
@@ -193,6 +192,7 @@ function Homepage() {
                       className="cards-img-top rounded"
                       alt="..."
                     ></img>
+
                     <h5 class="cards-title my-2">{newsItem.title}</h5>
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
@@ -211,9 +211,13 @@ function Homepage() {
             </Swiper>
           </div>
 
-          <Headlines newsItem={headlines[0]} />
-          <Headlines newsItem={headlines[1]} />
-          <Headlines newsItem={headlines[2]} />
+
+          <Headlines/>
+
+          <Headlines newsItem = {headlines[0]}/> 
+          <Headlines newsItem = {headlines[1]}/>
+          <Headlines newsItem = {headlines[2]}/>
+          
 
           <div className="container">
             <h2 className="my-4">Top News</h2>
@@ -246,6 +250,7 @@ function Homepage() {
                       className="cards-img-top rounded"
                       alt="..."
                     ></img>
+
                     <h5 class="cards-title my-2">{newsItem.title}</h5>
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
@@ -256,6 +261,7 @@ function Homepage() {
                       </a>
                     </Link>
                     {/* <a href="" class="btn btn-outline-danger btn-sm mx-2">
+
                       Like
                     </a> */}
                   </div>
@@ -268,105 +274,8 @@ function Homepage() {
           <Headlines newsItem={headlines[4]} />
           <Headlines newsItem={headlines[5]} />
 
-          <div className="container my-3">
-            <h2>Featured News </h2>
-            <div className="row my-4">
-              <div className="col-lg-3 col-sm-12 col-md-6 my-2 ">
-                <div className="card">
-                  <div class="card-body border rounded p-2">
-                    <h5 class="card-title my-2">Title Text</h5>
-                    <img
-                      src="/images/img1.jpg"
-                      className="card-img-top rounded"
-                      alt="..."
-                    ></img>
-                    <p class="my-2 truncate">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
-                      eum similique repellat a laborum, rerum voluptates ipsam
-                    </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
 
-                      Like
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-12  col-md-6 my-2">
-                <div className="card">
-                  <div class="card-body border rounded p-2">
-                    <h5 class="card-title my-2">Title Text</h5>
-                    <img
-                      src="/images/img1.jpg"
-                      className="card-img-top rounded"
-                      alt="..."
-                    ></img>
-                    <p class="my-2 truncate">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
-                      eum similique repellat a laborum, rerum voluptates ipsam
-                    </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
-
-                      Like
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-12 col-md-6 my-2">
-                <div className="card">
-                  <div class="card-body border rounded p-2">
-                    <h5 class="card-title my-2">Title Text</h5>
-                    <img
-                      src="/images/img1.jpg"
-                      className="card-img-top rounded"
-                      alt="..."
-                    ></img>
-                    <p class="my-2 truncate">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
-                      eum similique repellat a laborum, rerum voluptates ipsam
-                    </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
-
-                      Like
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-sm-12 col-md-6 my-2">
-                <div className="card">
-                  <div class="card-body border rounded p-2">
-                    <h5 class="card-title my-2">Title Text</h5>
-                    <img
-                      src="/images/img1.jpg"
-                      className="card-img-top rounded"
-                      alt="..."
-                    ></img>
-                    <p class="my-2 truncate">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
-                      eum similique repellat a laborum, rerum voluptates ipsam
-                    </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
-
-                      Like
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="container">
+            <div className="container">
             <h2 className="my-4">Videos</h2>
 
             <Swiper
@@ -452,39 +361,6 @@ function Homepage() {
               ))}
             </Swiper>
           </div> */}
-
-          <div class=" ccar card my-4" >
-            <div class="row no-gutters">
-              <div class="col-sm-3">
-                <img class="card-img" height="200px" width="50%" src="/images/image2.jpg" alt="Suresh Dasari Card" />
-              </div>
-              <div class="col-sm-7">
-                <div class="card-body">
-                  <h6 class="card-title">TOPIC</h6>
-                  <p class="card-text truncate m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum sequi earum quasi ratione obcaecati sit ad assumenda praesentium ea fugit repellat, ullam facilis numquam sed temporibus. Deserunt assumenda necessitatibus molestias adipisci maiores corporis omnis, minus dignissimos ipsam exercitationem eligendi? Cupiditate atque recusandae alias neque ab!</p>
-                  <a href="#" class="btn btn-primary mt-2">Know More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="  ccar card my-4 " >
-            <div class="row no-gutters">
-              <div class="col-sm-3">
-                <img class="card-img" height="200px" width="1000%" src="/images/image2.jpg" alt="Suresh Dasari Card" />
-              </div>
-              <div class="col-sm-7">
-                <div class="card-body">
-                  <h6 class="card-title">TOPIC</h6>
-                  <p class="card-text truncate m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum sequi earum quasi ratione obcaecati sit ad assumenda praesentium ea fugit repellat, ullam facilis numquam sed temporibus. Deserunt assumenda necessitatibus molestias adipisci maiores corporis omnis, minus dignissimos ipsam exercitationem eligendi? Cupiditate atque recusandae alias neque ab!</p>
-                  <a href="#" class="btn btn-primary mt-2">Know More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
 
           <Footer />
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
