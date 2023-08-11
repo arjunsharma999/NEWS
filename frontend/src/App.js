@@ -22,6 +22,7 @@ import CarouselSelection from './Pages/CarouselSelection'
 import PageMain from './Pages/PageMain'
 import { useState, useEffect } from 'react'
 import GridLoader from "react-spinners/GridLoader";
+import Carousel from './Pages/carousel'
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -37,11 +38,13 @@ function App() {
     <div className='loader'>
       {
         loading ?
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <GridLoader
             color={'#d63736'}
             loading={loading}
             size={30}
           />
+          </div>
           : 
           <Router>
             <Routes>
@@ -59,6 +62,7 @@ function App() {
               <Route path="/dasfdsg" element={<Test />} />
               <Route path="/gdd" element={<Sort />} />
               <Route path="/articleee" element={<PageMain />} />
+              <Route path='/carousel' element={<Carousel />} />
 
               {/* Admin routes */}
 

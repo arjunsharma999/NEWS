@@ -98,37 +98,39 @@ function Modify() {
 
   return (
     <>
-      <div class=' free col-md-7  '>
-        <Sort onChange={handleSort} />
-      </div>
+      <div className=' container '>
+        <div class=' free col-md-7  '>
+          <Sort onChange={handleSort} marginTop={0} />
+        </div>
 
-      <div class=' free col-md-7  '>
-        <CategoryFilter onChange={handleFilter} additionlaCategories={additionlaCategories} />
-      </div>
+        <div class=' free col-md-7  '>
+          <CategoryFilter onChange={handleFilter} additionlaCategories={additionlaCategories} marginTop={10} />
+        </div>
 
-      <div class="card pt-1 m-5" >
-        {newsData.map(newsItem => (
-          <div class="row no-gutters">
-            <div class="col-sm-3">
-              <img class="card-img" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
-            </div>
-            <div class="col-sm-9">
-              <div class="card-body">
-                <h5 class="card-title">{newsItem.title}</h5>
-                <p class="card-text truncate m-0">{newsItem.content}</p>
-                <Link to={`/news-article/${newsItem.slug}`} >
-                  <a href="#" class="btn btn-primary me-2">View</a>
-                </Link>
-                <Link to={`/admin/edit/${newsItem.slug}`} >
-                  <a href="#" class="btn btn-warning me-2">EDIT</a>
-                </Link>
-                <a href="#" class="btn btn-danger " onClick={() => handleDelete(newsItem.slug)}>Delete</a>
+
+        <div class="card pt-1 my-4" >
+          {newsData.map(newsItem => (
+            <div class="row no-gutters">
+              <div class="col-sm-3">
+                <img class="card-img" height="200px" width="50%" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
+              </div>
+              <div class="col-sm-9">
+                <div class="card-body">
+                  <h5 class="card-title">{newsItem.title}</h5>
+                  <p class="card-text truncate m-0">{newsItem.content}</p>
+                  <Link to={`/news-article/${newsItem.slug}`} >
+                    <a href="#" class="btn btn-primary me-2">View</a>
+                  </Link>
+                  <Link to={`/admin/edit/${newsItem.slug}`} >
+                    <a href="#" class="btn btn-warning me-2">EDIT</a>
+                  </Link>
+                  <a href="#" class="btn btn-danger " onClick={() => handleDelete(newsItem.slug)}>Delete</a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
 
 
       {/* <div class="card pt-5 m-5" >

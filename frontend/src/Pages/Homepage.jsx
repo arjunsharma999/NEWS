@@ -103,7 +103,7 @@ function Homepage() {
       ) : (
         <>
           <Navbar />
-          <div className="">
+          <div className="swiper-container">
             <Swiper
               spaceBetween={10}
               pagination={{
@@ -116,47 +116,29 @@ function Homepage() {
               }}
               modules={[Autoplay, Pagination]}
               className="mySwiper my-5"
-              style={{ maxWidth: '100%', maxHeight: '650px' }}
+              style={{ maxWidth: '100%', maxHeight: '94vh' }}
             >
               <SwiperSlide>
-                <img 
-                className="pillarboxed-image"
-                 src={carousel[0].imageUrl} 
-                alt="" />
-                {/* <div className="pillarboxed-image" style={{ backgroundImage: `url(${carousel[0].imageUrl})` }}>
-                  <h5>carousel[0].title</h5>
-                </div> */}
+                <Link to={`/news-article/${carousel[0].slug}`}>
+                  <img
+                    className="pillarboxed-image"
+                    src={carousel[0].imageUrl}
+                    alt="" />
+                  <h3 className="carousel-news-title">{carousel[0].title}</h3>
+                </Link>
               </SwiperSlide>
               <SwiperSlide>
-                <img className="pillarboxed-image" src={carousel[1].imageUrl} alt="" />
+                <Link to={`/news-article/${carousel[1].slug}`}>
+                  <img className="pillarboxed-image" src={carousel[1].imageUrl} alt="" />
+                  <h3 className="carousel-news-title">{carousel[1].title}</h3>
+                </Link>
               </SwiperSlide>
               <SwiperSlide>
-              <img className="pillarboxed-image" src={carousel[2].imageUrl} alt="" />
-                {/* <div className="pillarboxed-image"
-                  style={{
-                    backgroundImage: `url(${carousel[2].imageUrl})`,
-                    // width: '100%',
-                    // height: "auto",
-                    // backgroundSize: 'cover',
-                  }}></div> */}
+                <Link to={`/news-article/${carousel[2].slug}`}>
+                  <img className="pillarboxed-image" src={carousel[2].imageUrl} alt="" />
+                  <h3 className="carousel-news-title">{carousel[2].title}</h3>
+                </Link>
               </SwiperSlide>
-              {/* <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/image2.jpg" alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/reliimage.jpg" alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/image2.jpg" alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/image2.jpg" alt="" />
-              </SwiperSlide> */}
-
             </Swiper>
           </div>
 
@@ -202,22 +184,19 @@ function Homepage() {
                         Read More
                       </a>
                     </Link>
-                    {/* <a href="" class="btn btn-outline-danger btn-sm mx-2">
-                      Like
-                    </a> */}
                   </div>
                 </div></SwiperSlide>
               ))}
             </Swiper>
           </div>
 
+          <div className="container" >
+            <h2 className="my-4">Headlines</h2>
+            <Headlines newsItem={headlines[0]} />
+            <Headlines newsItem={headlines[1]} />
+            <Headlines newsItem={headlines[2]} />
+          </div>
 
-          <Headlines/>
-
-          <Headlines newsItem = {headlines[0]}/> 
-          <Headlines newsItem = {headlines[1]}/>
-          <Headlines newsItem = {headlines[2]}/>
-          
 
           <div className="container">
             <h2 className="my-4">Top News</h2>
@@ -270,12 +249,14 @@ function Homepage() {
             </Swiper>
           </div>
 
-          <Headlines newsItem={headlines[3]} />
-          <Headlines newsItem={headlines[4]} />
-          <Headlines newsItem={headlines[5]} />
+          <div className="container">
+            <h2 className="my-4">Headlines</h2>
+            <Headlines newsItem={headlines[3]} />
+            <Headlines newsItem={headlines[4]} />
+            <Headlines newsItem={headlines[5]} />
+          </div>
 
-
-            <div className="container">
+          <div className="container">
             <h2 className="my-4">Videos</h2>
 
             <Swiper

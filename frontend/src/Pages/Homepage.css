@@ -132,6 +132,8 @@ a {
 .ccar{
    margin: auto;
    width: 85%;
+   background: #fffcf8;
+   padding: .5%;
 } 
 
 
@@ -706,8 +708,7 @@ footer{
 
 .mySwiper {
   width: 100%;
-  
-  
+  height: auto;
 }
 
 .swiper-image {
@@ -722,7 +723,7 @@ footer{
   background-position: center;  */
   width: 100%; /* Full width of the container */
   height: auto; /* Maintain aspect ratio */
-  max-height: 650px; 
+  max-height: 94vh; 
   object-fit: cover;
   /* Pillarboxing */
   position: relative;
@@ -760,6 +761,17 @@ footer{
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.swiper-container {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .swiper-slide img {
@@ -767,8 +779,27 @@ footer{
   object-fit: cover;
 }
 
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  /* height: 100%;  */
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+  box-sizing: content-box;
+}
 
- 
-
-
-
+.carousel-news-title {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  background-color: transparent;
+  color: white;
+  padding: 20px;
+  width: 50%;
+  box-sizing: border-box;
+  z-index: 1;
+  text-align: left;
+  font-size: 40px;
+}

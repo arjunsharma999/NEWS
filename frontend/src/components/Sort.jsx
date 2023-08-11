@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 
-function Sort({onChange}) {
+function Sort({onChange, marginTop}) {
 
     const [ value, setValue] = useState (null)
 
@@ -12,7 +12,7 @@ function Sort({onChange}) {
 
   return (
     <>
-     <div style={{margin: 20, width: 200}}>
+     <div style={{width: 200, marginTop: marginTop}}>
      <Select  options={option} defaultValue="sort by date" placeholder="Sort list" onChange={onChange}/>
      </div>
     
