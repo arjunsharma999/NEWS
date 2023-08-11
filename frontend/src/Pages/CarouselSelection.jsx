@@ -7,6 +7,7 @@ import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
 import Sort from '../components/Sort'
 import CategoryFilter from '../components/Filter';
+import { showAlert } from './DialogBox';
 
 function CarouselSelection() {
     const [newsData, setNewsData] = useState([]);
@@ -61,6 +62,7 @@ function CarouselSelection() {
                 },
             })
             console.log((await response).data);
+            showAlert('success', 'Success', 'The news for Carousel were set successfully');
         }
         catch (error) {
             console.log("Error ", error);
@@ -144,8 +146,8 @@ function CarouselSelection() {
 
             <div className=' container '>
                 <div class=' free col-md-7  '>
-                    <Sort onChange={handleSort} />
-                    <CategoryFilter onChange={handleFilter} additionlaCategories={additionlaCategories} />
+                    <Sort onChange={handleSort} marginTop={0} />
+                    <CategoryFilter onChange={handleFilter} additionlaCategories={additionlaCategories} marginTop={10} />
 
                 </div>
                 {newsData.map(newsItem => (

@@ -300,10 +300,10 @@ const Dashboard = () => {
                             <Link to="/Modify-post">
                                 <Button color='danger me-2'> Modify</Button>
                             </Link>
-                            <Link to="/Modify-post">
+                            <Link to="/admin/Headlines-Selection">
                                 <Button color='info me-2'> Goto Headline </Button>
                             </Link>
-                            <Link to="/Modify-post">
+                            <Link to="/admin/Carousel-Selection">
                                 <Button color='dark '> Goto Slider </Button>
                             </Link>
 

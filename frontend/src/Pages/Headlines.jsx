@@ -5,7 +5,8 @@ function Headlines({ newsItem }) {
         return null;
     return (
         <>
-            <div class=" ccar card my-4 " key={newsItem._id} >
+        
+            <div class=" ccar card my-4 "  key={newsItem._id} style={{ marginRight: '20%' }} >
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <img class="card-img" height="200px" width="50%" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
@@ -21,6 +22,7 @@ function Headlines({ newsItem }) {
                     </div>
                 </div>
             </div>
+            
         </>
     )
 }

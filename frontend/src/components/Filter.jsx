@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
-function CategoryFilter({ onChange, additionlaCategories}) {
+function CategoryFilter({ onChange, additionlaCategories, marginTop}) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const defaultCategories = [
@@ -31,7 +31,7 @@ function CategoryFilter({ onChange, additionlaCategories}) {
   };
 
   return (
-    <div style={{ margin: 20, width: 200 }}>
+    <div style={{ marginTop: marginTop, width: 200 }}>
       <Select
         options={combinedCategories}
         value={selectedCategory}
