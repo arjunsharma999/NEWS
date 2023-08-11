@@ -117,8 +117,18 @@ function Homepage() {
               modules={[Autoplay, Pagination]}
               className="mySwiper my-5"
               style={{ maxWidth: '100%', maxHeight: '94vh' }}
-            >
+            >{carousel.map((newsItem) => (
               <SwiperSlide>
+                <Link to={`/news-article/${newsItem.slug}`}>
+                  <img
+                    className="pillarboxed-image"
+                    src={newsItem.imageUrl}
+                    alt="" />
+                  <h3 className="carousel-news-title">{newsItem.title}</h3>
+                </Link>
+              </SwiperSlide>
+            ))}
+              {/* <SwiperSlide>
                 <Link to={`/news-article/${carousel[0].slug}`}>
                   <img
                     className="pillarboxed-image"
@@ -138,7 +148,7 @@ function Homepage() {
                   <img className="pillarboxed-image" src={carousel[2].imageUrl} alt="" />
                   <h3 className="carousel-news-title">{carousel[2].title}</h3>
                 </Link>
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
           </div>
 
@@ -192,9 +202,13 @@ function Homepage() {
 
           <div className="container" >
             <h2 className="my-4">Headlines</h2>
-            <Headlines newsItem={headlines[0]} />
-            <Headlines newsItem={headlines[1]} />
-            <Headlines newsItem={headlines[2]} />
+            {headlines.length > 0 ? (
+              headlines.slice(0, 3).map((newsItem, index) => (
+                <Headlines key={index} newsItem={newsItem} />
+              ))
+            ) : (
+              <p>No headlines available.</p>
+            )}
           </div>
 
 
@@ -251,9 +265,11 @@ function Homepage() {
 
           <div className="container">
             <h2 className="my-4">Headlines</h2>
-            <Headlines newsItem={headlines[3]} />
-            <Headlines newsItem={headlines[4]} />
-            <Headlines newsItem={headlines[5]} />
+            {headlines.length > 0 ? (
+              headlines.slice(3, 6).map((newsItem, index) => (
+                <Headlines key={index} newsItem={newsItem} />
+              ))
+            ) : null}
           </div>
 
           <div className="container">
