@@ -15,13 +15,13 @@ body {
 
 }
 
-.loader{
+ .loader{
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
   
-}
+} 
 .nav {
   position: relative;
   top: 0;
