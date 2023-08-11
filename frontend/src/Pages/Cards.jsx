@@ -49,7 +49,9 @@ function Cards ({newsData}) {
                       className="cards-img-top rounded"
                       alt="..."
                     ></img>
-                    <h5 class="cards-title my-2">{newsItem.title}</h5>
+                   <p class="truncate-title">
+                    <h5 class="cards-title my-2" style={{ lineHeight: '1.5' }}>{newsItem.title}</h5>
+                    </p>
                     <p class="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>

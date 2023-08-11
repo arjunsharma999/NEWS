@@ -132,21 +132,41 @@ function NewsArticle({ match }) {
       <div className="container my-5">
         <div className="d-flex flex-column justify-centent-center my-5">
           <div className=' mainn img-fluid d-flex'>
-            <img className="pillarboxed-image" src={newsData.imageUrl} alt="" />
+            <img className="news-article-image" src={newsData.imageUrl} alt="" />
 
-            <div class="recent row-lg-7 m-5">
+            {/* <div class="recent row-lg-7 m-5">
               <div class="row">
-                <div class="card ">
-                  <div class="card-body">
-                    <h5 class="card-title">{newsData.title}</h5>
-                    <p class="card-text truncate m-0 ">{newsData.content}</p>
-                    <a href="#" class="btn btn-primary">Read Now..</a>
-                  </div>
-                </div>
+                <h2 className='my-3'>
+                  {newsData.title}
+                </h2>
               </div>
-            </div>
+              <div className=' social '>
+                <a className='fbb me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+
+                <a className='ytt me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+
+                <a className='ig me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+
+                <a className='pin me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
+                  <ion-icon name="logo-pinterest"></ion-icon>
+                </a>
+              </div>
+            </div> */}
           </div>
+
           
+
+          <div>
+            <h3 className='my-3'>
+              {newsData.title}
+            </h3>
+          </div>
           <div className=' social '>
             <a className='fbb me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
               <ion-icon name="logo-facebook"></ion-icon>
@@ -164,12 +184,6 @@ function NewsArticle({ match }) {
               <ion-icon name="logo-pinterest"></ion-icon>
             </a>
           </div>
-
-          <div>
-            <h2 className='my-3'>
-              {newsData.title}
-            </h2>
-          </div>
           <div>
             <p>
               <div dangerouslySetInnerHTML={renderFormattedContent(newsData.content)} />
@@ -177,25 +191,28 @@ function NewsArticle({ match }) {
             <div> <h5>लेखक - {newsData.authorDetails} </h5></div>
           </div>
         </div>
-      
 
-      <div className="list-group-item my-3">
-        {/* Check if ytVideoId is present */}
-        {newsData.ytVideoId && (
-          <iframe
-            src={`https://www.youtube.com/embed/${newsData.ytVideoId}`}
-            width="100%"
-            height="600px"
-            title=" "
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        )}
-        {/* Add other content related to ytItem here */}
-        {/* <h5 className="card-title my-2 card-title-fixed-length">{ytItem.title}</h5>
+
+        <div className="list-group-item my-3">
+          {/* Check if ytVideoId is present */}
+          {newsData.ytVideoId && (
+            <iframe
+              src={`https://www.youtube.com/embed/${newsData.ytVideoId}`}
+              width="100%"
+              height="600px"
+              title=" "
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          )}
+          {/* Add other content related to ytItem here */}
+          {/* <h5 className="card-title my-2 card-title-fixed-length">{ytItem.title}</h5>
                   <p className="card-text">{ytItem.description}</p> */}
-        {/* Add any other content you want to display */}
-      </div>
+          {/* Add any other content you want to display */}
+        </div>
+
+        <Cards newsData={ralatedNewsData} />
+
       </div>
 
 
