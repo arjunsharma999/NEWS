@@ -18,11 +18,11 @@ import Video from './Pages/Video'
 import Test from './Pages/Test'
 import Sort from './components/Sort'
 import HeadlinesSelection from './Pages/HeadlinesSelection'
+import CarouselSelection from './Pages/CarouselSelection'
 import PageMain from './Pages/PageMain'
 import { useState, useEffect } from 'react'
 import GridLoader from "react-spinners/GridLoader";
-
-
+import Carousel from './Pages/carousel'
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -38,11 +38,13 @@ function App() {
     <div className='loader'>
       {
         loading ?
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <GridLoader
             color={'#d63736'}
             loading={loading}
             size={30}
           />
+          </div>
           : 
           <Router>
             <Routes>
@@ -60,20 +62,20 @@ function App() {
               <Route path="/dasfdsg" element={<Test />} />
               <Route path="/gdd" element={<Sort />} />
               <Route path="/articleee" element={<PageMain />} />
+              <Route path='/carousel' element={<Carousel />} />
 
               {/* Admin routes */}
 
               <Route path="/admin/Log-in" element={<LoginWrapper />} />
               <Route path="/admin/Sign-up" element={<Signup />} />
-              <Route path="/admin/Dashboard" element={<Dashboard />} />
-              <Route path="/admin/edit/:slug" element={<Dashboard />} />
-              <Route path="/Modify-post" element={<Modify />} />
-              <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection />} />
 
+              <Route path="/admin/Dashboard" element={<Dashboard/>}/>
+              <Route path="/admin/edit/:slug" element={<Dashboard/>}/>
+              <Route path="/Modify-post" element={<Modify/>}/>
+              <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection/>}/>
+              <Route path="/admin/Carousel-Selection" element={<CarouselSelection/>}/> 
+                
             </Routes>
-
-
-
           </Router>
           }
           </div>

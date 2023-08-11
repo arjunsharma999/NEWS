@@ -1,21 +1,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { baseUrl } from '../../Constants';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import {showAlert} from '../../Pages/DialogBox';
 const LoginWrapper = () => {
-  
- 
-    // Swal.fire({
-    //   icon: 'error',
-    //   title: 'Oops...',
-    //   text: 'Wrong password',
-     
-    // })
-  
-
   const navigate = useNavigate();
-
-  const handleLogin = (jwtToken) => {
+  const handleLogin = () => {
     // Retrieving JWT token from sessionStorage
     console.log("login successfull");
     navigate('/admin/dashboard'); // Redirect to /admin/dashboard
@@ -26,10 +16,6 @@ const LoginWrapper = () => {
 export default LoginWrapper;
 
 class Login extends Component {
- 
-  
-
-  
 
   constructor(props) {
     super(props)
@@ -39,10 +25,6 @@ class Login extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleLogin = (jwtToken) => {
-    localStorage.setItem('jwtToken', jwtToken);
-  };
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,27 +48,23 @@ class Login extends Component {
       if (response.status === 200) {
         console.log('Login successful!');
         // Handle successful login, e.g., redirect to the dashboard
-        this.props.onLogin(data.jwtToken);
+        this.props.onLogin();
       } else {
         console.log('Login failed!');
         // Handle login failure, e.g., show an error message to the user
+        showAlert('error', 'Oops...' , 'Wrong Password');
       }
     } catch (error) {
       console.log('Error during login:', error);
       // Handle other errors, e.g., network error
     }
-
-
-}
+  }
 
   render() {
     return (
       <>
-
         <form onSubmit={this.handleSubmit}>
-
           <div className=' pt-5'>
-
             <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-4 col-lg-3 pt-5  ">
               <label></label>
               <input
@@ -96,7 +74,6 @@ class Login extends Component {
                 onChange={(e) => this.setState({ username: e.target.value })}
               />
             </div>
-
             <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-2">
               <label></label>
               <input
@@ -126,7 +103,8 @@ class Login extends Component {
             </div> */}
 
             <div className="d-flex align-items-sm-center mb-4 mx-auto col-10 col-md-8 col-lg-3 pt-">
-              <button  type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
+
                 Submit
               </button>
             </div>
@@ -137,4 +115,4 @@ class Login extends Component {
     )
   }
 }
-//export default withRouter(Login);
+

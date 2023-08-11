@@ -9,7 +9,7 @@ import Sort from '../components/Sort'
 import CategoryFilter from '../components/Filter';
 import { showAlert } from './DialogBox';
 
-function HeadlinesSelection() {
+function CarouselSelection() {
     const [newsData, setNewsData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -19,13 +19,13 @@ function HeadlinesSelection() {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedNewsFetched, setSelectedNewsFetched] = useState(false);
     const additionlaCategories = [
-        { value: "Headlines", label: "Headlines" }
+        { value: "Carousel", label: "Carousel" }
     ];
 
     const getSelectedNews = async () => {
         try {
             if (!selectedNewsFetched) {
-                const response = axios.get(`${baseUrl}/news/headlines-slugs`);
+                const response = axios.get(`${baseUrl}/news/carousel-slugs`);
                 setSelectedNews((await response).data);
                 setSelectedNewsFetched(true);
             }
@@ -39,7 +39,7 @@ function HeadlinesSelection() {
         if (selectedNews.includes(slug)) {
             setSelectedNews(selectedNews.filter(id => id !== slug));
         } else {
-            if (selectedNews.length < 6) {
+            if (selectedNews.length < 3) {
                 setSelectedNews([...selectedNews, slug]);
             } else {
                 // You can show a message here indicating that the maximum selection limit has been reached
@@ -48,21 +48,21 @@ function HeadlinesSelection() {
         }
     };
 
-    const saveHeadlines = async() => {
-        if (selectedNews.length < 6) {
-            console.log("Select exactly 6 headlines to continue");
+    const saveCarousel = async() => {
+        if (selectedNews.length < 3) {
+            console.log("Select exactly 3 Carousel to continue");
         }
         const slugs = {
             slugs: selectedNews
         }
         try {
-            const response = axios.post(`${baseUrl}/news/insertHeadlines`, slugs, {
+            const response = axios.post(`${baseUrl}/news/insertCarousel`, slugs, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             })
             console.log((await response).data);
-            showAlert('success', 'Success', 'The headlines were selected successfully');
+            showAlert('success', 'Success', 'The news for Carousel were set successfully');
         }
         catch (error) {
             console.log("Error ", error);
@@ -94,11 +94,11 @@ function HeadlinesSelection() {
         console.log(selectedCategory);
     };
 
-    const getHeadlines = async () => {
+    const getCarousel = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/news/headlines`);
+            const response = await axios.get(`${baseUrl}/news/carousel`);
             setNewsData(response.data);
-            console.log("headlines", response.data);
+            console.log("carousel", response.data);
         }
         catch (error) {
             console.error(error.response.data.message);
@@ -108,8 +108,8 @@ function HeadlinesSelection() {
     useEffect(() => {
         // Make the API call to fetch news data
         getSelectedNews();
-        if (selectedCategory === "Headlines") {
-            getHeadlines();
+        if (selectedCategory === "Carousel") {
+            getCarousel();
             setTotalPages(1);
         }
         else {
@@ -198,10 +198,10 @@ function HeadlinesSelection() {
 
             </div>
             <div className='container my-5 d-flex gap-4 justify-content-center'>
-                <button onClick={() => saveHeadlines()}
+                <button onClick={() => saveCarousel()}
                     className='btn '
                 >
-                    Save Headlines
+                    Save Carousel
                 </button>
             </div>
 
@@ -215,4 +215,4 @@ function HeadlinesSelection() {
     );
 }
 
-export default HeadlinesSelection;
+export default CarouselSelection;

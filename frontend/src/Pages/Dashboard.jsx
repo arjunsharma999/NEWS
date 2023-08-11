@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../Constants';
+import { showConfirmationAlert } from './ConfirmationDialogBox';
+import { showAlert } from './DialogBox';
 
 const Dashboard = () => {
     const { slug } = useParams();
@@ -81,7 +83,7 @@ const Dashboard = () => {
 
     }, [slug]);
     console.log(slug);
-    
+
     const fetchDataForModification = async (slug) => {
         setAction("Modify")
         try {
@@ -123,28 +125,62 @@ const Dashboard = () => {
         console.log(category);
         console.log(content);
 
+
+
         if (action === "Create") {
-            try {
-                const response = await axios.post(`${baseUrl}/news/create`, formData, {
-                    withCredentials: true, // This includes cookies in the request
-                });
-                console.log('News article created:', response.data);
-                // Handle the response from the API as needed
-            } catch (error) {
-                console.log('Error creating news article:', error);
-                // Handle the error if the API call fails.
+            const result = showConfirmationAlert('warning', 'Confirmation Required', 'Are you sure you want to create this news');
+            if ((await result).isConfirmed) {
+                try {
+                    const response = await axios.post(`${baseUrl}/news/create`, formData, {
+                        withCredentials: true, // This includes cookies in the request
+                    });
+                    console.log('News article created:', response.data);
+                    showAlert('success', 'Done', 'News Created Successfully');
+                    navigate(`/Modify-post`);
+                    // Handle the response from the API as needed
+                } catch (error) {
+                    console.log('Error creating news article:', error);
+                    // Handle the error if the API call fails.
+                    
+                    if (error.response.status === 401) {
+                        showAlert('error', 'Error!!', 'Not Authorized to this action');
+                      }
+                      else if(error.message.status === 404){
+                        showAlert('error', 'Error!!', 'The news article not found');
+                      }
+                    else if(error.message.status === 400){
+                        showAlert('error', 'Error!!', 'Fill the mandatory fields');
+                    }
+                    else {
+                        showAlert('error', 'Error!!', 'Error occured while doing this action')
+                    }
+                }
             }
         }
-        else if(action === "Modify"){
-            try {
-                const response = await axios.post(`${baseUrl}/news/modify/${dataForModify._id}`, formData, {
-                    withCredentials: true, // This includes cookies in the request
-                });
-                console.log('News article created:', response.data);
-                // Handle the response from the API as needed
-            } catch (error) {
-                console.log('Error creating news article:', error);
-                // Handle the error if the API call fails.
+        else if (action === "Modify") {
+            const result = showConfirmationAlert('warning', 'Confirmation Required', 'Are you sure you want to modify this news');
+            if ((await result).isConfirmed) {
+                try {
+                    const response = await axios.post(`${baseUrl}/news/modify/${dataForModify._id}`, formData, {
+                        withCredentials: true, // This includes cookies in the request
+                    });
+                    console.log('News article created:', response.data);
+                    // Handle the response from the API as needed
+                    showAlert('success', 'Done', 'News Modified Successfully');
+                    navigate(`/Modify-post`);
+                } catch (error) {
+                    console.log('Error creating news article:', error);
+                    // Handle the error if the API call fails.
+                    if (error.response.status === 401) {
+                        showAlert('error', 'Error!!', 'Not Authorized to this action');
+                      }
+                      else if(error.message.status === 404){
+                        showAlert('error', 'Error!!', 'The news article not found');
+                      }
+                    else {
+                        showAlert('error', 'Error!!', 'Error occured while doing this action')
+                    }
+                }
             }
         }
     };
@@ -264,10 +300,10 @@ const Dashboard = () => {
                             <Link to="/Modify-post">
                                 <Button color='danger me-2'> Modify</Button>
                             </Link>
-                            <Link to="/Modify-post">
+                            <Link to="/admin/Headlines-Selection">
                                 <Button color='info me-2'> Goto Headline </Button>
                             </Link>
-                            <Link to="/Modify-post">
+                            <Link to="/admin/Carousel-Selection">
                                 <Button color='dark '> Goto Slider </Button>
                             </Link>
 

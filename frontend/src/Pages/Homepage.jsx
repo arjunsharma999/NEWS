@@ -8,6 +8,8 @@ import Footer from "../components/AdminPage/Footer";
 import axios from "axios";
 import { baseUrl, popularUrl, trendingUrl, ytUrl } from "../Constants";
 import Headlines from "./Headlines";
+import { Link } from "react-router-dom";
+import { showAlert } from "./DialogBox";
 
 
 function Homepage() {
@@ -16,6 +18,7 @@ function Homepage() {
   const [ytData, setYtData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [headlines, setHeadlines] = useState([]);
+  const [carousel, setCarousel] = useState([]);
 
   const getTrendingNews = async () => {
     const response = await axios.get(`${baseUrl}${trendingUrl}`);
@@ -37,40 +40,51 @@ function Homepage() {
     window.open(url, '_blank');
   };
 
-  const getHeadlines =async () =>{
-    try{
+  const getHeadlines = async () => {
+    try {
       const response = await axios.get(`${baseUrl}/news/headlines`);
       setHeadlines(response.data);
-      console.log("headlines" , response.data);
-
+      console.log("headlines", response.data);
     }
-    catch(error){
+    catch (error) {
       console.error(error.response.data.message);
     }
-
   }
+
+  const getCarousel = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/news/carousel`);
+      setCarousel(response.data);
+      console.log("carousel", response.data);
+    }
+    catch (error) {
+      console.error(error.response.data.message);
+    }
+  }
+
   useState(() => {
     try {
-      Promise.all([  
-      getTrendingNews(),
-      getPupularNews(),
-      getYtData(),
-      getHeadlines()])
-      .then(()=>{
-        setIsLoading(false);
-        console.log('All data fetched successfully');
-      })
-      .catch(()=>{
-        setIsLoading(false);
-      })
-      
+      Promise.all([
+        getTrendingNews(),
+        getPupularNews(),
+        getYtData(),
+        getHeadlines(),
+        getCarousel()
+      ])
+        .then(() => {
+          setIsLoading(false);
+          console.log('All data fetched successfully');
+        })
+        .catch(() => {
+          showAlert('error', 'Error!', 'Error while fetching the news data');
+          setIsLoading(false);
+        })
+
     }
     catch (error) {
       console.error('Error fetching data:', error);
       setIsLoading(false);
     }
-    setIsLoading(false);
-
   }, []);
 
   const renderFormattedContent = (htmlContent) => {
@@ -89,7 +103,7 @@ function Homepage() {
       ) : (
         <>
           <Navbar />
-          <div className="">
+          <div className="swiper-container">
             <Swiper
               spaceBetween={10}
               pagination={{
@@ -101,39 +115,32 @@ function Homepage() {
                 disableOnInteraction: false,
               }}
               modules={[Autoplay, Pagination]}
-              className="mySwiper "
+              className="mySwiper my-5"
+              style={{ maxWidth: '100%', maxHeight: '94vh' }}
             >
-            
-        
               <SwiperSlide>
-              
-                < img  width="100%"
-  
-                  height="50%" src="/images/img2.jpg" alt=""  />
-                 
-               </SwiperSlide>
-              <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img3.jpg" alt="" />
+                <Link to={`/news-article/${carousel[0].slug}`}>
+                  <img
+                    className="pillarboxed-image"
+                    src={carousel[0].imageUrl}
+                    alt="" />
+                  <h3 className="carousel-news-title">{carousel[0].title}</h3>
+                </Link>
               </SwiperSlide>
               <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img11.jpg" alt="" />
+                <Link to={`/news-article/${carousel[1].slug}`}>
+                  <img className="pillarboxed-image" src={carousel[1].imageUrl} alt="" />
+                  <h3 className="carousel-news-title">{carousel[1].title}</h3>
+                </Link>
               </SwiperSlide>
               <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img22.jpg" alt="" />
+                <Link to={`/news-article/${carousel[2].slug}`}>
+                  <img className="pillarboxed-image" src={carousel[2].imageUrl} alt="" />
+                  <h3 className="carousel-news-title">{carousel[2].title}</h3>
+                </Link>
               </SwiperSlide>
-              <SwiperSlide>
-                <img width="100%"
-                  height="50%" src="/images/img33.jpg" alt="" />
-              </SwiperSlide>
-             
-             
             </Swiper>
           </div>
-
-        
 
           <div className="container">
             <h2 className="my-4">Trending News</h2>
@@ -159,7 +166,7 @@ function Homepage() {
               {trendingNewsData.map(newsItem => (
                 <SwiperSlide> <div className="cards">
                   <div class="cards-body border rounded p-2">
-                    
+
                     <img
                       width="100%"
                       height="180px"
@@ -167,27 +174,30 @@ function Homepage() {
                       className="cards-img-top rounded"
                       alt="..."
                     ></img>
-                    <h5 class="cards-title my-1 ">{newsItem.title}</h5>
-                    <p class="my-1 truncate" dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} >
-                      </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
-                      Like
-                    </a>
+
+                    <h5 class="cards-title my-2">{newsItem.title}</h5>
+                    <p class="my-2 truncate">
+                      <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
+                    </p>
+                    <Link to={`/news-article/${newsItem.slug}`}>
+                      <a href="" class="btn btn-outline-success btn-sm ">
+                        Read More
+                      </a>
+                    </Link>
                   </div>
                 </div></SwiperSlide>
               ))}
             </Swiper>
           </div>
 
-          <Headlines/>
+          <div className="container" >
+            <h2 className="my-4">Headlines</h2>
+            <Headlines newsItem={headlines[0]} />
+            <Headlines newsItem={headlines[1]} />
+            <Headlines newsItem={headlines[2]} />
+          </div>
 
-          <Headlines newsItem = {headlines[0]}/> 
-          <Headlines newsItem = {headlines[1]}/>
-          <Headlines newsItem = {headlines[2]}/>
-          
+
           <div className="container">
             <h2 className="my-4">Top News</h2>
 
@@ -219,31 +229,34 @@ function Homepage() {
                       className="cards-img-top rounded"
                       alt="..."
                     ></img>
-                    <h1 class="cards-title my-1">{newsItem.title}</h1>
-                    <p class="my-1 truncate" >
-                    
-                    {/* <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)}/> */}
 
-                    <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ipsa soluta reprehenderit ut provident architecto quas non sit corrupti tempora sed, atque suscipit repudiandae iure possimus consequatur illo vitae. Consequuntur tenetur consequatur corrupti harum doloribus adipisci eaque ipsum, reiciendis odio optio odit totam porro ducimus dolore atque sunt veritatis omnis, quo voluptatem rem nostrum quos blanditiis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis voluptatem fugit ipsum. Porro ipsum delectus sint architecto assumenda praesentium alias labore excepturi ducimus similique officiis doloribus quos, est ex tempora nam sit nisi deleniti pariatur modi numquam a, molestiae non. Laborum doloremque optio ipsam excepturi?</h6>
-                       </p>
-                    <a href="" class="btn btn-outline-success btn-sm ">
-                      Read More
-                    </a>
-                    <a href="" class="btn btn-outline-danger btn-sm mx-2">
+                    <h5 class="cards-title my-2">{newsItem.title}</h5>
+                    <p class="my-2 truncate">
+                      <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
+                    </p>
+                    <Link to={`/news-article/${newsItem.slug}`}>
+                      <a href="" class="btn btn-outline-success btn-sm ">
+                        Read More
+                      </a>
+                    </Link>
+                    {/* <a href="" class="btn btn-outline-danger btn-sm mx-2">
+
                       Like
-                    </a>
+                    </a> */}
                   </div>
                 </div></SwiperSlide>
               ))}
             </Swiper>
           </div>
 
-          <Headlines newsItem = {headlines[3]}/>
-          <Headlines newsItem = {headlines[4]}/>
-          <Headlines newsItem = {headlines[5]}/>
+          <div className="container">
+            <h2 className="my-4">Headlines</h2>
+            <Headlines newsItem={headlines[3]} />
+            <Headlines newsItem={headlines[4]} />
+            <Headlines newsItem={headlines[5]} />
+          </div>
 
-
-            <div className="container">
+          <div className="container">
             <h2 className="my-4">Videos</h2>
 
             <Swiper
@@ -329,9 +342,6 @@ function Homepage() {
               ))}
             </Swiper>
           </div> */}
-
-         
-          
 
           <Footer />
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

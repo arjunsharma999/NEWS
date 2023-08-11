@@ -14,19 +14,19 @@ function PageMain() {
             <img src="/images/img2.jpg" alt="" />
 
 
-            
-          <div class="recent row-lg-7 m-5">
-            <div class="row">
-              <div class="card ">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text truncate m-0 ">With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum sequi aspernatur quae veniam magnam qui eum quidem a unde, cupiditate tempora! Tempore facilis placeat culpa quaerat, rerum molestiae rem? Eaque nulla non, quidem corporis ad aut adipisci nisi, facere dicta tenetur quibusdam, iusto repellendus? Hic, nesciunt labore ducimus amet commodi animi quod quam fugit ullam dolorem.</p>
-                  <a href="#" class="btn btn-primary">Read Now..</a>
+
+            <div class="recent row-lg-7 m-5">
+              <div class="row">
+                <div class="card ">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text truncate m-0 ">With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum sequi aspernatur quae veniam magnam qui eum quidem a unde, cupiditate tempora! Tempore facilis placeat culpa quaerat, rerum molestiae rem? Eaque nulla non, quidem corporis ad aut adipisci nisi, facere dicta tenetur quibusdam, iusto repellendus? Hic, nesciunt labore ducimus amet commodi animi quod quam fugit ullam dolorem.</p>
+                    <a href="#" class="btn btn-primary">Read Now..</a>
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-</div>
+          </div>
 
           <div className=' social '>
             <a className='fbb me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
