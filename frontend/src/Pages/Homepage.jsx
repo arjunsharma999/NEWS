@@ -101,7 +101,7 @@ function Homepage() {
                 disableOnInteraction: false,
               }}
               modules={[Autoplay, Pagination]}
-              className="mySwiper my-5"
+              className="mySwiper "
             >
             
         
@@ -116,6 +116,19 @@ function Homepage() {
                 <img width="100%"
                   height="50%" src="/images/img3.jpg" alt="" />
               </SwiperSlide>
+              <SwiperSlide>
+                <img width="100%"
+                  height="50%" src="/images/img11.jpg" alt="" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img width="100%"
+                  height="50%" src="/images/img22.jpg" alt="" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img width="100%"
+                  height="50%" src="/images/img33.jpg" alt="" />
+              </SwiperSlide>
+             
              
             </Swiper>
           </div>
