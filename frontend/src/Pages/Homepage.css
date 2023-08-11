@@ -185,8 +185,16 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* number of lines to show */
-          line-clamp: 4;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.truncate-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 
@@ -659,11 +667,12 @@ footer{
 .cards-body {
   padding: 16px;
   height: 410px; 
+  
 }
 
 /* Styling for the card title */
 .cards-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -802,4 +811,16 @@ footer{
   z-index: 1;
   text-align: left;
   font-size: 40px;
+}
+
+.news-article-image {
+  /* background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center;  */
+  width: 100%; /* Full width of the container */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 65vh; 
+  object-fit: cover;
+  /* Pillarboxing */
+  position: relative;
 }
