@@ -25,7 +25,7 @@ function Headlines({ newsItem }) {
                                 <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                             </p>
                             <Link to={`/news-article/${newsItem.slug}`}>
-                                <a href="#" class="btn btn-primary mt-2">Know More</a>
+                                <a href="#" class=" position-sticky btn btn-primary mt-2">Know More</a>
                             </Link>
                         </div>
                     </div>

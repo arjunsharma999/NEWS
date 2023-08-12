@@ -15,7 +15,6 @@ import About from './Pages/About'
 import Modify from './Pages/Modify'
 import Footer from './components/AdminPage/Footer'
 import Video from './Pages/Video'
-import Test from './Pages/Test'
 import Sort from './components/Sort'
 import HeadlinesSelection from './Pages/HeadlinesSelection'
 import CarouselSelection from './Pages/CarouselSelection'
@@ -59,7 +58,6 @@ function App() {
               <Route path="/Footer" element={<Footer />} />
               <Route path="/About" element={<About />} />
               <Route path="/Video" element={<Video />} />
-              <Route path="/dasfdsg" element={<Test />} />
               <Route path="/gdd" element={<Sort />} />
               <Route path="/articleee" element={<PageMain />} />
               <Route path='/carousel' element={<Carousel />} />

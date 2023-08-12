@@ -175,7 +175,7 @@ function Homepage() {
             >
               {trendingNewsData.map(newsItem => (
                 <SwiperSlide> <div className="cards">
-                  <div class="cards-body border rounded p-2">
+                  <div className="cards-body border rounded p-2">
 
                     <img
                       width="100%"
@@ -184,14 +184,14 @@ function Homepage() {
                       className="cards-img-top rounded"
                       alt="..."
                     ></img>
-                    <p class="truncate-title">
-                      <h5 class="cards-title my-2" style={{ lineHeight: '1.5' }}>{newsItem.title}</h5>
+                    <p className="truncate-title">
+                      <h5 className="cards-title my-2" style={{ lineHeight: '1.5' }}>{newsItem.title}</h5>
                     </p>
-                    <p class="my-2 truncate">
+                    <p className="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>
                     <Link to={`/news-article/${newsItem.slug}`}>
-                      <a href="" class="btn btn-outline-success btn-sm ">
+                      <a href="" className=" position-static btn btn-outline-success btn-sm ">
                         Read More
                       </a>
                     </Link>
@@ -236,7 +236,7 @@ function Homepage() {
             >
               {popularNewsData.map(newsItem => (
                 <SwiperSlide> <div className="cards">
-                  <div class="cards-body border rounded p-2">
+                  <div className="cards-body border rounded p-2">
                     <img
                       width="100%"
                       height="180px"
@@ -245,18 +245,18 @@ function Homepage() {
                       alt="..."
                     ></img>
 
-                    <p class="truncate-title">
-                      <h5 class="cards-title my-2" style={{ lineHeight: '1.5' }}>{newsItem.title}</h5>
+                    <p className="truncate-title">
+                      <h5 className="cards-title my-2" style={{ lineHeight: '1.5' }}>{newsItem.title}</h5>
                     </p>
-                    <p class="my-2 truncate">
+                    <p className="my-2 truncate">
                       <div dangerouslySetInnerHTML={renderFormattedContent(newsItem.content)} />
                     </p>
                     <Link to={`/news-article/${newsItem.slug}`}>
-                      <a href="" class="btn btn-outline-success btn-sm ">
+                      <a href="" className="  position-static btn btn-outline-success btn-sm ">
                         Read More
                       </a>
                     </Link>
-                    {/* <a href="" class="btn btn-outline-danger btn-sm mx-2">
+                    {/* <a href="" className="btn btn-outline-danger btn-sm mx-2">
 
                       Like
                     </a> */}

@@ -824,3 +824,8 @@ footer{
   /* Pillarboxing */
   position: relative;
 }
+
+
+.sidee {
+  display: flex;
+}
