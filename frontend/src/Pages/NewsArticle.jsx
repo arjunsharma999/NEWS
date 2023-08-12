@@ -1,12 +1,14 @@
 // This page is for showing a particular news
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { EmailIcon, EmailShareButton, FacebookIcon ,  FacebookShareButton,  PinterestIcon,  PinterestShareButton,  TelegramIcon,  TelegramShareButton,  WhatsappIcon, WhatsappShareButton } from 'react-share' ;
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/AdminPage/Navbar';
 import Footer from '../components/AdminPage/Footer';
 import { baseUrl } from '../Constants';
 import { showAlert } from './DialogBox';
 import Cards from './Cards';
+
 
 function NewsArticle({ match }) {
   const [newsData, setNewsData] = useState({});
@@ -87,6 +89,8 @@ function NewsArticle({ match }) {
     return { __html: htmlContent };
   };
 
+  const shareUrl = "http://localhost:3000/news-article/testing"
+
   return (
     // <>
 
@@ -163,39 +167,65 @@ function NewsArticle({ match }) {
           <div className=' mainn img-fluid d-flex'>
             <img className="news-article-image" src={newsData.imageUrl} alt="" />
 
-            {/* <div class="recent row-lg-7 m-5">
+
+
+             <div class="recent row-lg-7 m-5">
               <div class="row">
                 <h2 className='my-3'>
                   {newsData.title}
                 </h2>
               </div>
               <div className=' social '>
-                <a className='fbb me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </a>
+              
+              <div 
+             
+             style={{
+              background: '#0003',
+              height: '0vh'
+              
 
-                <a className='ytt me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
-                  <ion-icon name="logo-youtube"></ion-icon>
-                </a>
+             }}
+            
+            >
+             <FacebookShareButton url={shareUrl}>
+                 <FacebookIcon size={40}/>
+             </FacebookShareButton>
+             
+             <WhatsappShareButton url={shareUrl}>
+                 <WhatsappIcon size={40}/>
+             </WhatsappShareButton>
 
-                <a className='ig me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
-                  <ion-icon name="logo-instagram"></ion-icon>
-                </a>
+             <TelegramShareButton url={shareUrl}>
+                 <TelegramIcon size={40}/>
+             </TelegramShareButton>
 
-                <a className='pin me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
-                  <ion-icon name="logo-pinterest"></ion-icon>
-                </a>
+             <EmailShareButton url={shareUrl}>
+                 <EmailIcon size={40}/>
+             </EmailShareButton>
+
+             
+             <PinterestShareButton url={shareUrl}>
+                 <PinterestIcon size={40}/>
+             </PinterestShareButton>
+
+
+            </div>
+
+               
+
+                
               </div>
-            </div> */}
+            </div> 
           </div>
 
 
 
           <div>
-            <h3 className='my-3'>
+            {/* <h3 className='my-3'>
               {newsData.title}
-            </h3>
+            </h3> */}
           </div>
+
           <div className=' social '>
             <a className='fbb me-2 ' href={facebookShareUrl} onClick={(e) => {
               e.preventDefault();  // Prevent default link behavior
@@ -208,6 +238,7 @@ function NewsArticle({ match }) {
               <ion-icon name="logo-youtube"></ion-icon>
             </a> */}
 
+
             {/* <a className='ig me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
               <ion-icon name="logo-instagram"></ion-icon>
             </a> */}
@@ -218,6 +249,7 @@ function NewsArticle({ match }) {
             >
               <ion-icon name="logo-whatsapp"></ion-icon>
             </a>
+
             <a className='tw me-2 ' href={twitterShareUrl} onClick={(e) => {
               e.preventDefault();  // Prevent default link behavior
               shareArticle('twitter');  // Call your shareArticle function
@@ -225,7 +257,7 @@ function NewsArticle({ match }) {
             >
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
-          </div>
+          </div> */}
           <div>
             <p>
               <div dangerouslySetInnerHTML={renderFormattedContent(newsData.content)} />

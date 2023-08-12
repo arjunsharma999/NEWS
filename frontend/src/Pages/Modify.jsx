@@ -110,7 +110,7 @@ function Modify() {
 
         <div class="card pt-1 my-4" >
           {newsData.map(newsItem => (
-            <div class="row no-gutters">
+            <div class="row no-gutters ">
               <div class="col-sm-3">
                 <img class="card-img" height="200px" width="50%" src={newsItem.imageUrl} alt="Suresh Dasari Card" />
               </div>
