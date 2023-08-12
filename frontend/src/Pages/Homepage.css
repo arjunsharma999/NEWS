@@ -11,8 +11,7 @@
 
 body {
   background: #f5f5f5;
-  
-
+  /* user-select: none; */
 }
 
 .loader{
@@ -416,6 +415,15 @@ footer{
 
 .pin{
   color: red;
+  font-size: 40px;
+}
+
+.wa{
+  color:#28a745;
+  font-size: 40px;
+}
+.tw{
+  color:#3498db;
   font-size: 40px;
 }
 
