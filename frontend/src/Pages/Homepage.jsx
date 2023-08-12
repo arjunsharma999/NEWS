@@ -10,6 +10,7 @@ import { baseUrl, popularUrl, trendingUrl, ytUrl } from "../Constants";
 import Headlines from "./Headlines";
 import { Link } from "react-router-dom";
 import { showAlert } from "./DialogBox";
+import { GridLoader } from "react-spinners";
 
 
 function Homepage() {
@@ -99,7 +100,13 @@ function Homepage() {
   return (
     <div>
       {isLoading ? (
-        <div>Loading...</div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <GridLoader
+          color={'#d63736'}
+          loading={isLoading}
+          size={30}
+        />
+      </div>
       ) : (
         <>
           <Navbar />
@@ -298,7 +305,7 @@ function Homepage() {
             >
               {ytData.map((ytItem) => (
                 <SwiperSlide key={ytItem._id}>
-                  <div className="card" >
+                  <div className="cards" >
                     <div className="video-container">
                       <iframe
                         src={`https://www.youtube.com/embed/${ytItem.videoId}`}

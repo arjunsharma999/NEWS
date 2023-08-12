@@ -34,19 +34,20 @@ function App() {
   }, [])
   return (
     <>
-    <div className='loader'>
-      {
-        loading ?
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <GridLoader
-            color={'#d63736'}
-            loading={loading}
-            size={30}
-          />
-          </div>
-          : 
-          <Router>
-            <Routes>
+      <div className='loader'>
+        {
+          loading ?
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+              <GridLoader
+                color={'#d63736'}
+                loading={loading}
+                size={30}
+              />
+            </div>
+            :
+            <Router>
+              <Routes>
+
 
               {/* User Routes */}
               <Route exact path="/" element={<Homepage />} />
@@ -62,23 +63,23 @@ function App() {
               <Route path="/articleee" element={<PageMain />} />
               <Route path='/carousel' element={<Carousel />} />
 
-              {/* Admin routes */}
+                {/* Admin routes */}
 
-              <Route path="/admin/Log-in" element={<LoginWrapper />} />
-              <Route path="/admin/Sign-up" element={<Signup />} />
+                <Route path="/admin/Log-in" element={<LoginWrapper />} />
+                <Route path="/admin/Sign-up" element={<Signup />} />
 
-              <Route path="/admin/Dashboard" element={<Dashboard/>}/>
-              <Route path="/admin/edit/:slug" element={<Dashboard/>}/>
-              <Route path="/Modify-post" element={<Modify/>}/>
-              <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection/>}/>
-              <Route path="/admin/Carousel-Selection" element={<CarouselSelection/>}/> 
-                
-            </Routes>
-          </Router>
-          }
-          </div>
-      
-     </>
+                <Route path="/admin/Dashboard" element={<Dashboard />} />
+                <Route path="/admin/edit/:slug" element={<Dashboard />} />
+                <Route path="/Modify-post" element={<Modify />} />
+                <Route path="/admin/Headlines-Selection" element={<HeadlinesSelection />} />
+                <Route path="/admin/Carousel-Selection" element={<CarouselSelection />} />
+
+              </Routes>
+            </Router>
+        }
+      </div>
+
+    </>
   )
 }
 

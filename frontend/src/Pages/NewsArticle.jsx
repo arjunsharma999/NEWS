@@ -13,6 +13,9 @@ import Cards from './Cards';
 function NewsArticle({ match }) {
   const [newsData, setNewsData] = useState({});
   const [ralatedNewsData, setRelatedNewsData] = useState([]);
+  const [facebookShareUrl, setFacebookShareUrl] = useState(``);
+  const [whatsappShareUrl, setWhatsappShareUrl] = useState(``);
+  const [twitterShareUrl, setTwitterShareUrl] = useState(``);
 
   const { slug } = useParams();
 
@@ -21,6 +24,7 @@ function NewsArticle({ match }) {
       .then(response => {
         setNewsData(response.data);
         console.log(response.data);
+        shareArticle(response.data.title, response.data.slug);
       })
       .catch(error => {
         console.log('Error fetching news:', error);
@@ -41,6 +45,30 @@ function NewsArticle({ match }) {
 
   }
 
+  function shareArticle(buttonPressed) {
+    const baseUrl = window.location.origin;
+    const shareUrl = `${baseUrl}/news-article/${newsData.slug}`;
+
+    const shareTitle = encodeURIComponent(newsData.title);
+    const shareUrlEncoded = encodeURIComponent(shareUrl);
+
+    const twitterShareUrl = `https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrlEncoded}`;
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrlEncoded}`;
+    const whatsappShareUrl = `https://api.whatsapp.com/send?text=${shareTitle} - ${shareUrlEncoded}`;
+    console.log(whatsappShareUrl);
+    setFacebookShareUrl(facebookShareUrl);
+    setTwitterShareUrl(twitterShareUrl);
+    setWhatsappShareUrl(whatsappShareUrl);
+    // Open a new window for sharing
+    if (buttonPressed === 'twitter')
+      window.open(twitterShareUrl, '_blank');
+    else if (buttonPressed === 'facebook')
+      window.open(facebookShareUrl, '_blank');
+    else if (buttonPressed === 'whatsapp')
+      window.open(whatsappShareUrl, '_blank');
+  }
+
+
   useEffect(() => {
     // Fetch the news data by its slug from the backend API
     window.scrollTo({
@@ -50,6 +78,7 @@ function NewsArticle({ match }) {
     console.log(slug);
     getData();
     getRelatedNews();
+
 
   }, [slug]);
 
@@ -189,28 +218,44 @@ function NewsArticle({ match }) {
             </div> 
           </div>
 
-          
+
 
           <div>
             {/* <h3 className='my-3'>
               {newsData.title}
             </h3> */}
           </div>
-          {/* <div className=' social '>
-            <a className='fbb me-2 ' href="https://www.facebook.com">
+
+          <div className=' social '>
+            <a className='fbb me-2 ' href={facebookShareUrl} onClick={(e) => {
+              e.preventDefault();  // Prevent default link behavior
+              shareArticle('facebook');  // Call your shareArticle function
+            }}
+            >
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
-
-            <a className='ytt me-2 ' href="https://www.facebook.com">
+            {/* <a className='ytt me-2 ' onClick={() => {shareArticle('facebook')}}>
               <ion-icon name="logo-youtube"></ion-icon>
-            </a>
+            </a> */}
 
-            <a className='ig me-2 ' href="https://www.facebook.com">
+
+            {/* <a className='ig me-2 ' href="https://www.facebook.com/profile.php?id=100009491612655">
               <ion-icon name="logo-instagram"></ion-icon>
+            </a> */}
+            <a className='wa me-2 ' href={whatsappShareUrl} onClick={(e) => {
+              e.preventDefault();  // Prevent default link behavior
+              shareArticle('whatsapp');  // Call your shareArticle function
+            }}
+            >
+              <ion-icon name="logo-whatsapp"></ion-icon>
             </a>
 
-            <a className='pin me-2 ' href="https://www.facebook.com">
-              <ion-icon name="logo-pinterest"></ion-icon>
+            <a className='tw me-2 ' href={twitterShareUrl} onClick={(e) => {
+              e.preventDefault();  // Prevent default link behavior
+              shareArticle('twitter');  // Call your shareArticle function
+            }}
+            >
+              <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </div> */}
           <div>
